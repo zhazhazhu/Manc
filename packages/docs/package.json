@@ -1,0 +1,8 @@
+{
+  "name": "docs",
+  "scripts": {
+    "docs:dev": "vite --port 3100",
+    "docs:build": "vite build"
+  },
+  "devDependencies": {}
+}

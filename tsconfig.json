@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "ES2016",
+    "lib": ["DOM", "ESNext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vite/client"]
+  },
+  "include": [
+    "packages/core/**/*.ts",
+    "packages/core/**/*.tsx",
+    "packages/core/**/*.vue",
+    "packages/docs/**/*.ts",
+    "packages/docs/**/*.tsx",
+    "packages/docs/**/*.vue"
+  ],
+  "exclude": ["**/dist/**", "node_modules", "vite.config.ts"]
+}
