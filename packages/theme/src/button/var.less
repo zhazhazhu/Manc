@@ -1,51 +1,78 @@
 .mc-button {
+  //大尺寸
   &--large {
     --button-padding-x: 18px;
     --button-padding-y: 10px;
     --button-font-size: 1rem;
   }
-
+  //默认尺寸
   &--default {
     --button-padding-x: 16px;
     --button-padding-y: 8px;
     --button-font-size: 0.9rem;
   }
-
+  //小尺寸
   &--small {
     --button-padding-x: 14px;
     --button-padding-y: 6px;
     --button-font-size: 0.8rem;
   }
-
+  //默认按钮
   &--default {
     --button-color: var(--mc-color-gray-5);
     --button-background: var(--mc-color-gray-9);
     --button-color-hover: var(--mc-color-gray-7);
     --button-color-active: var(--mc-color-white);
     --button-color-border: var(--mc-color-gray-9);
+    --button-background-disabled: var(--mc-color-gray-7);
   }
-
+  //主要按钮
   &--primary {
     --button-color: var(--mc-color-white);
     --button-background: var(--mc-color-theme-blue);
     --button-color-hover: var(--mc-color-theme-blue-light-3);
     --button-color-active: var(--mc-color-theme-blue);
     --button-color-border: var(--mc-color-theme-blue);
+    --button-background-disabled: var(--mc-color-theme-blue-light-5);
   }
-
+  //危险按钮
   &--danger {
     --button-color: var(--mc-color-white);
     --button-background: var(--mc-color-theme-red);
     --button-color-hover: var(--mc-color-theme-red-light-3);
     --button-color-active: var(--mc-color-theme-red);
     --button-color-border: var(--mc-color-theme-red);
+    --button-background-disabled: var(--mc-color-theme-red-light-5);
   }
-
+  //成功按钮
   &--success {
     --button-color: var(--mc-color-white);
     --button-background: var(--mc-color-theme-green);
     --button-color-hover: var(--mc-color-theme-green-light-3);
     --button-color-active: var(--mc-color-theme-green);
     --button-color-border: var(--mc-color-theme-green);
+    --button-background-disabled: var(--mc-color-theme-green-light-5);
+  }
+  //默认按钮-朴素
+  &--default.is-plain {
+    --button-color: var(--mc-color-gray-5);
+    --button-color-border: var(--mc-color-gray-7);
+    --button-color-hover: var(--mc-color-gray-5);
+  }
+  //主要按钮-朴素
+  &--primary.is-plain {
+    --button-color: var(--mc-color-theme-blue);
+    --button-color-border: var(--mc-color-theme-blue-light-7);
+    --button-color-hover: var(--mc-color-theme-blue-light-5);
+  }
+  //危险按钮-朴素
+  &--danger.is-plain {
+    --button-color: var(--mc-color-theme-red);
+    --button-color-border: var(--mc-color-theme-red-light-7);
+  }
+  //成功按钮-朴素
+  &--success.is-plain {
+    --button-color: var(--mc-color-theme-green);
+    --button-color-border: var(--mc-color-theme-green-light-7);
   }
 }

@@ -2,6 +2,7 @@
 
 .mc-button {
   margin-right: 8px;
+  margin-bottom: 4px;
   padding: 0;
   border: none;
   outline: none;
@@ -9,22 +10,35 @@
   color: white;
   letter-spacing: 0.15rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
   color: var(--button-color);
   border: 1px solid var(--button-color-border);
   font-size: var(--button-font-size);
   background-color: var(--button-background);
   padding: var(--button-padding-y) var(--button-padding-x);
-  //link样式
-  &.link {
-    background-color: transparent;
-    color: var(--button-background);
-
-    &:hover {
-      color: var(--button-color-hover);
-    }
-  }
-
+  //鼠标悬浮效果
   &:hover {
     background-color: var(--button-color-hover);
+  }
+  //朴素按钮
+  &.is-plain {
+    background-color: transparent;
+    border: 1px solid var(--button-color-border);
+    color: var(--button-color);
+  }
+  //朴素按钮悬浮
+  &.is-plain:hover {
+    color: var(--mc-color-white);
+    background-color: var(--button-color);
+  }
+  &.is-disabled {
+    background-color: var(--button-background-disabled);
+    border-color: var(--button-background-disabled);
+    cursor: no-drop;
+  }
+  &.is-round {
+    border-radius: 30px;
   }
 }

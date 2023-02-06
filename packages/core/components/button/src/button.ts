@@ -30,7 +30,27 @@ export const buttonProps = {
   },
   size: {
     type: String as PropType<ButtonSize>,
-    default: "default",
+    default: "small",
+  },
+  circle: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  plain: {
+    type: Boolean,
+    default: false,
+  },
+  autofocus: {
+    type: Boolean,
+    default: false,
+  },
+  round: {
+    type: Boolean,
+    default: false,
   },
 };
 
@@ -44,6 +64,12 @@ export function useButton(props: ButtonProps) {
 
 export function useButtonCustomStyle(props: ButtonProps) {
   return computed(() => {
-    return {} as CSSProperties;
+    let style = {};
+    if (props.color) {
+      style = {
+        "background-color": "",
+      };
+    }
+    return style as CSSProperties;
   });
 }

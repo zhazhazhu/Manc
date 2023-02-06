@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@ctrl/tinycolor': ^3.5.0
+      '@iconify/json': ^2.2.18
       '@manc-ui/hooks': workspace:*
       '@manc-ui/theme': workspace:^0.0.0
       '@types/lodash': ^4.14.184
@@ -29,6 +30,7 @@ importers:
       '@manc-ui/hooks': link:packages/hooks
       '@manc-ui/theme': link:packages/theme
     devDependencies:
+      '@iconify/json': 2.2.18
       '@types/lodash': 4.14.184
       '@types/node': 18.7.6
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.8+vue@3.2.37
@@ -468,6 +470,13 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@iconify/json/2.2.18:
+    resolution: {integrity: sha512-lYVcJFBtczKiYC9kd2TZW9CNV2PVEYjxLayPicI5EM5qFYZxrtmvSL6Nq3sc8XiuAFAMfBvIOjQDjZkf6dIgUA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.0
+    dev: true
 
   /@iconify/types/2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}

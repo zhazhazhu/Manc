@@ -1,6 +1,6 @@
 import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
-import { presetAttributify, presetUno } from "unocss";
+import { presetAttributify, presetIcons, presetUno } from "unocss";
 import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import IconsResolver from "unplugin-icons/resolver";
@@ -27,7 +27,12 @@ export default defineConfig({
           /* preset options */
         }),
         presetUno(),
-        // ...custom presets
+        presetIcons({
+          extraProperties: {
+            display: "inline-block",
+            "vertical-align": "middle",
+          },
+        }),
       ],
     }),
     Icons(),

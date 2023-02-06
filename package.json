@@ -13,6 +13,7 @@
     "major": "pnpm -C packages/core run major"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.18",
     "@types/lodash": "^4.14.184",
     "@types/node": "^18.7.6",
     "@vitejs/plugin-vue": "^3.0.3",
