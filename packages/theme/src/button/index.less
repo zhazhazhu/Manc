@@ -1,0 +1,30 @@
+@import "./var.less";
+
+.mc-button {
+  margin-right: 8px;
+  padding: 0;
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  color: white;
+  letter-spacing: 0.15rem;
+  cursor: pointer;
+  color: var(--button-color);
+  border: 1px solid var(--button-color-border);
+  font-size: var(--button-font-size);
+  background-color: var(--button-background);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  //link样式
+  &.link {
+    background-color: transparent;
+    color: var(--button-background);
+
+    &:hover {
+      color: var(--button-color-hover);
+    }
+  }
+
+  &:hover {
+    background-color: var(--button-color-hover);
+  }
+}

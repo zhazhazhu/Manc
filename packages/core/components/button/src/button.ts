@@ -1,6 +1,5 @@
-import { TinyColor } from "@ctrl/tinycolor";
 import { ReadonlyExtractPropTypes } from "packages/core/utils/vue";
-import { PropType, StyleValue } from "vue";
+import { CSSProperties, PropType } from "vue";
 
 export type ButtonTypes =
   | "default"
@@ -10,11 +9,7 @@ export type ButtonTypes =
   | "info"
   | "danger";
 
-export enum ButtonSize {
-  "large" = "large",
-  "default" = "default",
-  "small" = "small",
-}
+export type ButtonSize = "large" | "default" | "small";
 
 export const buttonProps = {
   type: {
@@ -34,7 +29,7 @@ export const buttonProps = {
     default: "",
   },
   size: {
-    type: Object as PropType<keyof typeof ButtonSize>,
+    type: Object as PropType<ButtonSize>,
     default: "default",
   },
 };
@@ -48,27 +43,7 @@ export function useButton(props: ButtonProps) {
 }
 
 export function useButtonCustomStyle(props: ButtonProps) {
-  const color = computed(() => {
-    const c: { [k in ButtonTypes]?: string } = {
-      default: "#6865E9",
-      primary: "#6865E9",
-      success: "#55B3C0",
-      danger: "#ee7070",
-      warning: "#FE832E",
-      info: "gray",
-    };
-    const bgColor = new TinyColor(c[props.type]);
-    const activeBgColor = bgColor.lighten();
-    return [bgColor.toString(), activeBgColor.toString()];
+  return computed(() => {
+    return {} as CSSProperties;
   });
-
-  const style: StyleValue = {
-    "--bg-color": props.color ? props.color : unref(color)[0],
-    "--hover-bg-color": props.color
-      ? new TinyColor(props.color).lighten().toString()
-      : unref(color)[1],
-    "--disabled-text-color": "#e3e6ec",
-  };
-
-  return style;
 }
