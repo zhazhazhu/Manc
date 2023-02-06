@@ -16,6 +16,7 @@ const { _ref } = useButton(props);
     :class="[cs.s(), cs.m(type), cs.m(size), cs.is('is-disabled', disabled)]"
     :style="buttonStyle"
     :disabled="disabled"
+    type="button"
     ref="_ref"
   >
     <slot name="default"></slot>

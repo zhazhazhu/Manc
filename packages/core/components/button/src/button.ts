@@ -13,7 +13,7 @@ export type ButtonSize = "large" | "default" | "small";
 
 export const buttonProps = {
   type: {
-    type: Object as PropType<ButtonTypes>,
+    type: String as PropType<ButtonTypes>,
     default: "default",
   },
   link: {
@@ -29,7 +29,7 @@ export const buttonProps = {
     default: "",
   },
   size: {
-    type: Object as PropType<ButtonSize>,
+    type: String as PropType<ButtonSize>,
     default: "default",
   },
 };
