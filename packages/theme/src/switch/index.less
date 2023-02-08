@@ -1,0 +1,52 @@
+@import "./var.less";
+
+.mc-switch {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  height: var(--switch-height);
+  vertical-align: middle;
+  margin-right: 6px;
+  &__core {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    min-width: var(--switch-min-width);
+    height: var(--switch-height);
+    outline: none;
+    border-radius: 30px;
+    box-sizing: border-box;
+    background: var(--switch-color-close);
+    cursor: pointer;
+  }
+  //开启时
+  &.is-checked &__core {
+    background: var(--switch-color-open);
+  }
+  //活动图标
+  &__core &__action {
+    position: absolute;
+    background: var(--mc-color-white);
+    border-radius: 100%;
+    width: var(--switch-size);
+    height: var(--switch-size);
+    left: 2px;
+    transition-duration: 0.15s;
+  }
+  //开启时的活动图标位置
+  &.is-checked &__core &__action {
+    left: calc(100% - var(--switch-height) + 2px);
+  }
+  &.is-disabled &__core {
+    background: var(--switch-color-close-disabled);
+    .mc-switch__action {
+      background: var(--switch-action-color-close-disabled);
+    }
+  }
+
+  &.is-disabled &__core:hover {
+    cursor: no-drop;
+  }
+}

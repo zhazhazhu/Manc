@@ -20,7 +20,7 @@
     "@vueuse/core": "^9.1.1",
     "less": "^4.1.3",
     "lodash": "^4.17.21",
-    "manci-ui": "workspace:*",
+    "manci-ui": "workspace:^0.0.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.7.4",

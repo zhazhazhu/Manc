@@ -1,0 +1,27 @@
+.mc-switch {
+  --switch-color-close: #0e4441;
+  --switch-color-open: #307d78;
+  --switch-color-close-disabled: #768483;
+  --switch-action-color-close-disabled: #ffffffeb;
+  &--small {
+    --switch-height: 28px;
+    --switch-min-width: 54px;
+  }
+  &--default {
+    --switch-height: 38px;
+    --switch-min-width: 74px;
+  }
+  &--large {
+    --switch-height: 48px;
+    --switch-min-width: 104px;
+  }
+  &--small &__core {
+    --switch-size: 24px;
+  }
+  &--default &__core {
+    --switch-size: 34px;
+  }
+  &--large &__core {
+    --switch-size: 44px;
+  }
+}

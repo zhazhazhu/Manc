@@ -1,14 +1,16 @@
-const namespaced = "mc";
+const namespaced = ref("mc");
 
-const isPrefix = "is-";
+const isPrefix = ref("is-");
 
 export function useClassesName(block: string) {
-  const s = () => `${namespaced}-${block}`;
+  const s = () => `${namespaced.value}-${block}`;
 
-  const m = (modifier?: string) => `${s()}--${modifier}`;
+  const m = (modifier?: string) => (modifier ? `${s()}--${modifier}` : "");
+
+  const e = (element?: string) => (element ? `${s()}__${element}` : "");
 
   const is = (name: string, state?: boolean) =>
-    state ? `${isPrefix}${name}` : "";
+    state ? `${isPrefix.value}${name}` : "";
 
-  return { s, m, is };
+  return { s, m, e, is };
 }
