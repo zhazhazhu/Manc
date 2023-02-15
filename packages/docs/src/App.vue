@@ -19,7 +19,9 @@ const visible = ref(false);
   <McSwitch v-model="check" size="large"></McSwitch>
 
   <McPopper content="content1content1content1content1content1content1content1">
-    <McButton @click="visible = !visible">Hover Popper</McButton>
+    <McButton @click="visible = !visible" style="margin-right: 10px"
+      >Hover Popper</McButton
+    >
   </McPopper>
   <McPopper
     trigger="click"
