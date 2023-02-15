@@ -1,6 +1,6 @@
-import { withInstall } from "../../utils/vue";
+import { withInstall } from "@manc-ui/utils";
 import Switch from "./src/switch.vue";
 
-export const MaSwitch = withInstall(Switch);
+export const McSwitch = withInstall(Switch);
 
-export default MaSwitch;
+export default McSwitch;

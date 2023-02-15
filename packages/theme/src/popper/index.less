@@ -1,0 +1,33 @@
+@import "./var.less";
+
+.mc-popper {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  position: absolute;
+  inset: 0 auto auto 0;
+  text-align: justify;
+  word-break: break-all;
+  box-sizing: border-box;
+  display: inline-block;
+  color: var(--mc-color-gray);
+  border: 1px solid var(--mc-color-gray-1);
+  border-radius: var(--mc-border-radius);
+  box-shadow: var(--mc-box-shadow-light);
+  background-color: var(--mc-color-white);
+}
+
+.mc-trigger {
+  display: inline-flex;
+}
+
+.mc-enter-active,
+.mc-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.mc-enter-from,
+.mc-leave-to {
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}

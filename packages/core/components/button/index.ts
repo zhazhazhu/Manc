@@ -1,6 +1,6 @@
-import { withInstall } from "../../utils/vue";
+import { withInstall } from "@manc-ui/utils";
 import Button from "./src/button.vue";
 
-export const MaButton = withInstall(Button);
+export const McButton = withInstall(Button);
 
-export default MaButton;
+export default McButton;

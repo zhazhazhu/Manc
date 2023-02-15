@@ -1,4 +1,4 @@
-import { ReadonlyExtractPropTypes } from "packages/core/utils/vue";
+import { ReadonlyExtractPropTypes } from "@manc-ui/utils";
 import { CSSProperties, PropType } from "vue";
 
 export type ButtonTypes =

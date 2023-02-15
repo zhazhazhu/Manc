@@ -1,4 +1,4 @@
-import { withInstall } from "../../utils/vue";
+import { withInstall } from "@manc-ui/utils";
 import MenuItem from "./src/menu-item.vue";
 import Menu from "./src/menu.vue";
 

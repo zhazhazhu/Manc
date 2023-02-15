@@ -1,0 +1,18 @@
+.mc-popper__arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  &::before {
+    width: 10px;
+    height: 10px;
+    content: " ";
+    position: absolute;
+    border: 1px solid #e4e7ed;
+    background: var(--mc-color-white);
+    border-bottom-color: transparent !important;
+    border-right-color: transparent !important;
+    border-top-left-radius: 2px;
+    transform: rotate(45deg);
+  }
+}

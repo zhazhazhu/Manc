@@ -1,8 +1,6 @@
 @import "./var.less";
 
 .mc-button {
-  margin-right: 8px;
-  margin-bottom: 4px;
   padding: 0;
   border: none;
   outline: none;
@@ -40,5 +38,8 @@
   }
   &.is-round {
     border-radius: 30px;
+  }
+  & + .mc-button {
+    margin-left: 10px;
   }
 }

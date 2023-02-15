@@ -43,6 +43,8 @@
   "dependencies": {
     "@ctrl/tinycolor": "^3.5.0",
     "@manc-ui/hooks": "workspace:*",
-    "@manc-ui/theme": "workspace:^0.0.0"
+    "@manc-ui/theme": "workspace:^0.0.0",
+    "@manc-ui/token": "workspace:^0.0.0",
+    "@manc-ui/utils": "workspace:^0.0.0"
   }
 }
