@@ -1,6 +1,6 @@
-import { useClassesName, useTimeout } from "@manc-ui/hooks";
+import { useClassesName, useClickAway, useTimeout } from "@manc-ui/hooks";
 import { isUndefine, ReadonlyExtractPropTypes } from "@manc-ui/utils";
-import { isBoolean } from "@vueuse/core";
+import { Fn, isBoolean } from "@vueuse/core";
 import { CSSProperties, PropType, Ref } from "vue";
 import { EventName } from "./events";
 
@@ -43,7 +43,6 @@ export const popperProps = {
   visible: {
     type: Boolean,
     default: undefined,
-    required: true,
   },
   width: {
     type: Number,
@@ -58,6 +57,7 @@ export const popperEmits = {
 export type PopperProps = ReadonlyExtractPropTypes<typeof popperProps>;
 
 export function usePopper(props: PopperProps) {
+  let cleanup: Fn | undefined;
   const triggerRef = ref<HTMLDivElement>();
   const { trigger, width } = toRefs(props);
 
@@ -65,12 +65,14 @@ export function usePopper(props: PopperProps) {
 
   function open() {
     if (!isUndefine(props.visible).value) return;
+    cleanup = useClickAway(triggerRef, close);
     if (trigger.value === "click") control.value = !control.value;
     else control.value = true;
   }
   function close() {
     if (!isUndefine(props.visible).value) return;
     control.value = false;
+    cleanup?.();
   }
   const position = usePosition(triggerRef, props);
 
