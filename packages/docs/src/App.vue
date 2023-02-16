@@ -47,6 +47,7 @@ const visible1 = ref(false);
       <McButton style="margin: 10px">Hover Popper</McButton>
     </McPopper>
     <McPopper
+      :width="500"
       trigger="click"
       content="this is content, this is content, this is content"
     >

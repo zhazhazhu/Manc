@@ -1,4 +1,9 @@
-import { useClassesName, useClickAway, useTimeout } from "@manc-ui/hooks";
+import {
+  useClassesName,
+  useClickAway,
+  useStyleUnit,
+  useTimeout,
+} from "@manc-ui/hooks";
 import { isUndefine, ReadonlyExtractPropTypes } from "@manc-ui/utils";
 import { isBoolean } from "@vueuse/core";
 import { CSSProperties, PropType, Ref } from "vue";
@@ -52,6 +57,22 @@ export const popperProps = {
     type: Boolean,
     default: false,
   },
+  showArrow: {
+    type: Boolean,
+    default: true,
+  },
+  showAfter: {
+    type: Number,
+    default: 10,
+  },
+  hideAfter: {
+    type: Number,
+    default: 10,
+  },
+  offset: {
+    type: Number,
+    default: 10,
+  },
 };
 
 export const popperEmits = {
@@ -67,9 +88,21 @@ export function usePopper(props: PopperProps) {
   const control = ref(props.visible || false);
   const position = usePosition(triggerRef, props);
 
-  const arrowStyle = ref<CSSProperties>({
-    transform: `translate(${width.value / 2 - 15}px, 0px)`,
-    top: "-6px",
+  const arrowStyle = computed<CSSProperties>(() => {
+    if (!triggerRef.value) return {};
+    return {
+      transform: `translate(${width.value / 2 - 15}px, 0px)`,
+      top: "-6px",
+    };
+  });
+
+  const contentStyle = computed<CSSProperties>(() => {
+    return {
+      transform: `translate(${position.left}px, ${position.top}px)`,
+      width: useStyleUnit(width).value,
+      zIndex: 2023,
+      inset: "0 auto auto 0",
+    };
   });
 
   const { registerListener, cleanupListener } = useClickAway(contentRef, {
@@ -98,7 +131,16 @@ export function usePopper(props: PopperProps) {
     );
   }
 
-  return { triggerRef, contentRef, open, close, control, position, arrowStyle };
+  return {
+    triggerRef,
+    contentRef,
+    open,
+    close,
+    control,
+    position,
+    arrowStyle,
+    contentStyle,
+  };
 }
 
 export type UseDelayedToggleProps = {
@@ -121,13 +163,13 @@ export function useDelayedToggle({
     }
     registerTimeout(() => {
       props.trigger === type && open();
-    }, 10);
+    }, props.showAfter);
   };
 
   const onClose = (event: Event, type: Trigger) => {
     registerTimeout(() => {
       props.trigger === type && close();
-    }, 10);
+    }, props.hideAfter);
   };
 
   return {

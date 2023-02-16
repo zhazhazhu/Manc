@@ -17,8 +17,16 @@ const props = defineProps(popperProps);
 
 const emit = defineEmits(popperEmits);
 
-const { triggerRef, control, position, arrowStyle, open, close, contentRef } =
-  usePopper(props);
+const {
+  triggerRef,
+  control,
+  contentStyle,
+  arrowStyle,
+  contentRef,
+  position,
+  open,
+  close,
+} = usePopper(props);
 
 const { onOpen, onClose } = useDelayedToggle({ props, open, close });
 
@@ -57,7 +65,7 @@ provide(POPPER_INJECTION_KEY, { arrowStyle });
         }"
       >
         <slot name="content">{{ content }}</slot>
-        <McArrow />
+        <McArrow v-show="showArrow" />
       </div>
     </Transition>
   </Teleport>
