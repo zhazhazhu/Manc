@@ -17,7 +17,7 @@ const props = defineProps(popperProps);
 
 const emit = defineEmits(popperEmits);
 
-const { triggerRef, control, position, arrowStyle, open, close } =
+const { triggerRef, control, position, arrowStyle, open, close, contentRef } =
   usePopper(props);
 
 const { onOpen, onClose } = useDelayedToggle({ props, open, close });
@@ -30,9 +30,12 @@ provide(POPPER_INJECTION_KEY, { arrowStyle });
 <template>
   <div
     ref="triggerRef"
-    @mouseover="onOpen('hover')"
-    @mouseleave="onClose('hover')"
-    @click="onOpen('click')"
+    @mouseover="onOpen($event, 'hover')"
+    @mouseleave="onClose($event, 'hover')"
+    @mousedown="onOpen($event, 'focus')"
+    @blur="onClose($event, 'focus')"
+    @click="onOpen($event, 'click')"
+    @contextmenu="onOpen($event, 'contextmenu')"
     :class="[t_cs.s()]"
   >
     <slot></slot>
@@ -40,10 +43,11 @@ provide(POPPER_INJECTION_KEY, { arrowStyle });
   <Teleport :to="`#${POPPER_CONTAINER_ID}`">
     <Transition
       name="mc"
-      @mouseover="onOpen('hover')"
-      @mouseleave="onClose('hover')"
+      @mouseover="onOpen($event, 'hover')"
+      @mouseleave="onClose($event, 'hover')"
     >
       <div
+        ref="contentRef"
         v-show="control"
         :class="[p_cs.s()]"
         :style="{

@@ -1,6 +1,6 @@
 import { useClassesName, useClickAway, useTimeout } from "@manc-ui/hooks";
 import { isUndefine, ReadonlyExtractPropTypes } from "@manc-ui/utils";
-import { Fn, isBoolean } from "@vueuse/core";
+import { isBoolean } from "@vueuse/core";
 import { CSSProperties, PropType, Ref } from "vue";
 import { EventName } from "./events";
 
@@ -48,6 +48,10 @@ export const popperProps = {
     type: Number,
     default: 200,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export const popperEmits = {
@@ -57,23 +61,10 @@ export const popperEmits = {
 export type PopperProps = ReadonlyExtractPropTypes<typeof popperProps>;
 
 export function usePopper(props: PopperProps) {
-  let cleanup: Fn | undefined;
   const triggerRef = ref<HTMLDivElement>();
+  const contentRef = ref<HTMLDivElement>();
   const { trigger, width } = toRefs(props);
-
   const control = ref(props.visible || false);
-
-  function open() {
-    if (!isUndefine(props.visible).value) return;
-    cleanup = useClickAway(triggerRef, close);
-    if (trigger.value === "click") control.value = !control.value;
-    else control.value = true;
-  }
-  function close() {
-    if (!isUndefine(props.visible).value) return;
-    control.value = false;
-    cleanup?.();
-  }
   const position = usePosition(triggerRef, props);
 
   const arrowStyle = ref<CSSProperties>({
@@ -81,16 +72,33 @@ export function usePopper(props: PopperProps) {
     top: "-6px",
   });
 
+  const { registerListener, cleanupListener } = useClickAway(contentRef, {
+    excepts: props.trigger === "focus" ? [] : [triggerRef],
+  });
+
+  function open() {
+    if (!isUndefine(props.visible).value) return;
+    registerListener(close);
+    if (trigger.value === "click") control.value = !control.value;
+    else control.value = true;
+  }
+  function close() {
+    if (!isUndefine(props.visible).value) return;
+    control.value = false;
+    cleanupListener?.();
+  }
+
   if (!isUndefine(props.visible).value) {
     watch(
       () => props.visible,
       (val) => {
+        if (props.disabled) return;
         control.value = val!;
       }
     );
   }
 
-  return { triggerRef, open, close, control, position, arrowStyle };
+  return { triggerRef, contentRef, open, close, control, position, arrowStyle };
 }
 
 export type UseDelayedToggleProps = {
@@ -106,16 +114,20 @@ export function useDelayedToggle({
 }: UseDelayedToggleProps) {
   const { registerTimeout } = useTimeout();
 
-  const onOpen = (type: Trigger) => {
+  const onOpen = (event: Event, type: Trigger) => {
+    if (props.disabled) return;
+    if (type === "contextmenu") {
+      event.preventDefault?.();
+    }
     registerTimeout(() => {
       props.trigger === type && open();
-    }, 50);
+    }, 10);
   };
 
-  const onClose = (type: Trigger) => {
+  const onClose = (event: Event, type: Trigger) => {
     registerTimeout(() => {
       props.trigger === type && close();
-    }, 50);
+    }, 10);
   };
 
   return {
@@ -133,12 +145,15 @@ function usePosition(
     left: 0,
   });
 
-  onMounted(() => {
+  const { left, top, width, height } = useElementBounding(_ref);
+
+  watch([left, top, width, height], ([left, top, width, height]) => {
     if (_ref.value) {
-      position.top = _ref.value.offsetTop + _ref.value?.clientHeight + 10 || 0;
+      position.top = top + height + 10 || 0;
       position.left =
-        _ref.value.offsetLeft + _ref.value.clientWidth / 2 - props.width / 2 ||
-        0;
+        left + width / 2 - props.width / 2 < 0
+          ? 0
+          : left + width / 2 - props.width / 2 || 0;
     }
   });
   return position;
