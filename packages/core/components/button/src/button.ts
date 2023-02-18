@@ -1,3 +1,4 @@
+import { TinyColor } from "@ctrl/tinycolor";
 import { ReadonlyExtractPropTypes } from "@manc-ui/utils";
 import { CSSProperties, PropType } from "vue";
 
@@ -52,6 +53,10 @@ export const buttonProps = {
     type: Boolean,
     default: false,
   },
+  border: {
+    type: Boolean,
+    default: true,
+  },
 };
 
 export type ButtonProps = ReadonlyExtractPropTypes<typeof buttonProps>;
@@ -63,13 +68,39 @@ export function useButton(props: ButtonProps) {
 }
 
 export function useButtonCustomStyle(props: ButtonProps) {
-  return computed(() => {
-    let style = {};
-    if (props.color) {
-      style = {
-        "background-color": "",
+  let styles: CSSProperties = {};
+  const color = new TinyColor(props.color);
+  const activeColor = color.mix("#141414", 20).lighten(5).toString();
+  if (props.color) {
+    if (props.plain) {
+      styles = {
+        "--button-background": activeColor,
+        "--button-color": props.color,
+        "--button-color-border": props.color,
+      };
+    } else {
+      if (props.disabled) {
+        styles = {
+          "--button-background": activeColor,
+          "--button-color-hover": activeColor,
+          "--button-color-border": props.color,
+        };
+      } else {
+        styles = {
+          "--button-background": props.color,
+          "--button-color-hover": activeColor,
+          "--button-color-border": props.color,
+        };
+      }
+    }
+    if (props.disabled) {
+      styles = {
+        "--button-background": activeColor,
+        "--button-color-hover": activeColor,
+        "--button-color-border": props.color,
+        "--button-color": "white",
       };
     }
-    return style as CSSProperties;
-  });
+  }
+  return styles;
 }

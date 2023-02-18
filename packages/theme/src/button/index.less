@@ -26,14 +26,18 @@
     border: 1px solid var(--button-color-border);
     color: var(--button-color);
   }
+  //去除border
+  &.is-border {
+    border: 0;
+  }
   //朴素按钮悬浮
   &.is-plain:hover {
     color: var(--mc-color-white);
-    background-color: var(--button-color);
+    background-color: var(--button-color-hover);
   }
   &.is-disabled {
-    background-color: var(--button-background-disabled);
-    border-color: var(--button-background-disabled);
+    background-color: var(--button-background);
+    border-color: var(--button-background);
     cursor: no-drop;
   }
   &.is-round {
