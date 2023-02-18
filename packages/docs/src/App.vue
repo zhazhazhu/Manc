@@ -21,50 +21,14 @@ const visible1 = ref(false);
     <McSwitch v-model="check" size="large"></McSwitch>
   </div>
   <div style="margin-bottom: 10px">
-    <McPopper
-      v-model:visible="visible"
-      :disabled="true"
-      :width="150"
-      content="this is content, this is content, this is content"
-    >
-      <McButton @click="visible = !visible" style="margin: 10px"
-        >Disabled Popper</McButton
-      >
-    </McPopper>
-    <McPopper
-      v-model:visible="visible1"
-      :width="150"
-      content="this is content, this is content, this is content"
-    >
-      <McButton @click="visible1 = !visible1" style="margin: 10px"
-        >Visible Popper</McButton
-      >
-    </McPopper>
-    <McPopper
-      trigger="hover"
-      content="this is content, this is content, this is content"
-    >
-      <McButton style="margin: 10px">Hover Popper</McButton>
-    </McPopper>
-    <McPopper
-      :width="500"
-      trigger="click"
-      content="this is content, this is content, this is content"
-    >
+    <McButton> 默认按钮</McButton>
+    <McButton type="primary">主要按钮</McButton>
+    <McButton type="success">成功按钮</McButton>
+    <McButton type="danger">危险按钮</McButton>
+    <McPopper :width="500" trigger="click" content="this is content, this is content, this is content">
       <McButton style="margin: 10px">Click Popper</McButton>
     </McPopper>
-    <McPopper
-      trigger="focus"
-      content="this is content, this is content, this is content"
-    >
-      <McButton style="margin: 10px">Focus Popper</McButton>
-    </McPopper>
-    <McPopper
-      trigger="contextmenu"
-      content="this is content, this is content, this is content"
-    >
-      <McButton style="margin: 10px">Contextmenu Popper</McButton>
-    </McPopper>
+
   </div>
 </template>
 

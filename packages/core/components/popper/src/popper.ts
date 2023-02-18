@@ -4,9 +4,10 @@ import {
   useStyleUnit,
   useTimeout,
 } from "@manc-ui/hooks";
+import type { UseStylesReturn } from "@manc-ui/token";
 import { isUndefine, ReadonlyExtractPropTypes } from "@manc-ui/utils";
 import { isBoolean } from "@vueuse/core";
-import { CSSProperties, PropType, Ref } from "vue";
+import { PropType, Ref } from "vue";
 import { EventName } from "./events";
 
 const POPPER_CONTAINER_ID = useClassesName("popper").m("container");
@@ -41,10 +42,10 @@ export const popperProps = {
     type: String,
     default: "",
   },
-  placement: {
-    type: String as PropType<Placement>,
-    default: "bottom",
-  },
+  // placement: {
+  //   type: String as PropType<Placement>,
+  //   default: "bottom",
+  // },
   visible: {
     type: Boolean,
     default: undefined,
@@ -63,11 +64,11 @@ export const popperProps = {
   },
   showAfter: {
     type: Number,
-    default: 10,
+    default: 0,
   },
   hideAfter: {
     type: Number,
-    default: 10,
+    default: 0,
   },
   offset: {
     type: Number,
@@ -84,26 +85,9 @@ export type PopperProps = ReadonlyExtractPropTypes<typeof popperProps>;
 export function usePopper(props: PopperProps) {
   const triggerRef = ref<HTMLDivElement>();
   const contentRef = ref<HTMLDivElement>();
-  const { trigger, width } = toRefs(props);
   const control = ref(props.visible || false);
-  const position = usePosition(triggerRef, props);
-
-  const arrowStyle = computed<CSSProperties>(() => {
-    if (!triggerRef.value) return {};
-    return {
-      transform: `translate(${width.value / 2 - 15}px, 0px)`,
-      top: "-6px",
-    };
-  });
-
-  const contentStyle = computed<CSSProperties>(() => {
-    return {
-      transform: `translate(${position.left}px, ${position.top}px)`,
-      width: useStyleUnit(width).value,
-      zIndex: 2023,
-      inset: "0 auto auto 0",
-    };
-  });
+  const styles = useStyles(triggerRef, contentRef, props);
+  const { trigger } = toRefs(props);
 
   const { registerListener, cleanupListener } = useClickAway(contentRef, {
     excepts: props.trigger === "focus" ? [] : [triggerRef],
@@ -137,9 +121,7 @@ export function usePopper(props: PopperProps) {
     open,
     close,
     control,
-    position,
-    arrowStyle,
-    contentStyle,
+    styles,
   };
 }
 
@@ -178,27 +160,58 @@ export function useDelayedToggle({
   };
 }
 
-function usePosition(
-  _ref: Ref<HTMLDivElement | undefined>,
+function useStyles(
+  triggerRef: Ref<HTMLDivElement | undefined>,
+  contentRef: Ref<HTMLDivElement | undefined>,
   props: PopperProps
 ) {
-  const position = reactive({
-    top: 0,
-    left: 0,
+  const windowSize = useWindowSize();
+  const { left, top, width, height } = useElementBounding(triggerRef);
+  const styles = reactive<UseStylesReturn>({
+    arrow: {},
+    content: {},
   });
 
-  const { left, top, width, height } = useElementBounding(_ref);
+  function arrowEffect(contentLeft: number) {
+    styles.arrow = {
+      transform: `translate(${
+        left.value - contentLeft + width.value / 2 - 5
+      }px, 0px)`,
+      top: "-6px",
+    };
+  }
 
-  watch([left, top, width, height], ([left, top, width, height]) => {
-    if (_ref.value) {
-      position.top = top + height + 10 || 0;
-      position.left =
-        left + width / 2 - props.width / 2 < 0
+  function contentEffect(contentLeft: number) {
+    const contentTop = top.value + height.value + 10 || 0;
+    styles.content = {
+      transform: `translate(${contentLeft}px, ${contentTop}px)`,
+      width: useStyleUnit(props.width).value,
+      zIndex: 2023,
+      inset: "0 auto auto 0",
+    };
+  }
+
+  watch(
+    [triggerRef, windowSize.width, windowSize.height],
+    () => {
+      if (!triggerRef.value) return;
+      let contentLeft = left.value + width.value / 2 - props.width / 2;
+      contentLeft =
+        contentLeft < 0
           ? 0
-          : left + width / 2 - props.width / 2 || 0;
+          : contentLeft + props.width > windowSize.width.value
+          ? windowSize.width.value - props.width
+          : contentLeft || 0;
+      arrowEffect(contentLeft);
+      contentEffect(contentLeft);
+    },
+    {
+      deep: true,
+      immediate: true,
     }
-  });
-  return position;
+  );
+
+  return computed(() => styles);
 }
 
 export { POPPER_CONTAINER_ID, createPopperContainer };
