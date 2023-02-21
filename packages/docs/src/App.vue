@@ -1,18 +1,32 @@
 <script lang="ts" setup>
-import { McButton, McPopper, McSwitch } from "manci-ui";
+import { McButton, McMenu, McMenuItem, McPopper, McSubMenu, McSwitch } from "manci-ui";
 import Button from "./pages/Button.vue";
 const check = ref(false);
 
 function onchange(val: boolean) {
   console.log("hi switch", val);
 }
-
-const visible = ref(false);
-const visible1 = ref(false);
 </script>
 
 <template>
+  <McMenu style="margin-bottom: 10px;">
+    <McMenuItem>MI</McMenuItem>
+    <McMenuItem>Manc UI</McMenuItem>
+    <McMenuItem>File</McMenuItem>
+    <McSubMenu>
+      <template #title>
+        Edit
+      </template>
+      <McMenuItem>Undo</McMenuItem>
+      <McMenuItem>Redo</McMenuItem>
+      <McMenuItem>Cut</McMenuItem>
+      <McMenuItem>Copy</McMenuItem>
+      <McMenuItem>Paste</McMenuItem>
+    </McSubMenu>
+  </McMenu>
+
   <Button></Button>
+  <McButton plain :border="false" color="rgb(51 65 85/1)" disabled>默认按钮</McButton>
 
   <div style="margin-bottom: 10px">
     <McSwitch :model-value="check" size="small" @change="onchange"></McSwitch>
@@ -28,7 +42,6 @@ const visible1 = ref(false);
     <McPopper :width="500" trigger="click" content="this is content, this is content, this is content">
       <McButton style="margin: 10px">Click Popper</McButton>
     </McPopper>
-
   </div>
 </template>
 

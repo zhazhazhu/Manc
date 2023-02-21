@@ -1,0 +1,33 @@
+@import "./var.less";
+
+.mc-menu-item,
+.mc-sub-menu--popper {
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 20px;
+  margin: 4px 0;
+  border-radius: 4px;
+}
+//菜单项
+.mc-sub-menu--content {
+  display: flex;
+  flex-direction: column;
+}
+//菜单项悬浮
+.mc-sub-menu--popper:hover {
+  transition: background-color 0.2s;
+  background-color: rgb(51 65 85 / var(--mc-bg-opacity));
+}
+.mc-menu-item:hover {
+  color: var(--mc-color-white);
+  transition: background-color 0.5s;
+  background-color: rgb(51 65 85 / var(--mc-bg-opacity));
+}
+//箭头
+.mc-sub-menu--arrow {
+  font-size: 16px;
+  display: inline-flex;
+}

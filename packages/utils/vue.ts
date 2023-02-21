@@ -6,10 +6,21 @@ import {
   Plugin,
 } from "vue";
 
-export const withInstall = <T extends Component>(main: T) => {
+export const withInstall = <T extends Component>(
+  main: T,
+  extra?: Record<string, any>
+) => {
   (main as Component & Plugin).install = (app: App): void => {
     app.component(main.name!, main);
   };
+
+  if (extra) {
+    Object.keys(extra).forEach((key) => {
+      (extra[key] as Component & Plugin).install = (app: App): void => {
+        app.component(key, extra[key]);
+      };
+    });
+  }
   return main;
 };
 

@@ -64,15 +64,15 @@ export const popperProps = {
   },
   showAfter: {
     type: Number,
-    default: 0,
+    default: 20,
   },
   hideAfter: {
     type: Number,
-    default: 0,
+    default: 20,
   },
   offset: {
     type: Number,
-    default: 10,
+    default: 0,
   },
 };
 
@@ -182,10 +182,10 @@ function useStyles(
   }
 
   function contentEffect(contentLeft: number) {
-    const contentTop = top.value + height.value + 10 || 0;
+    const contentTop = top.value + height.value + props.offset || 0;
     styles.content = {
       transform: `translate(${contentLeft}px, ${contentTop}px)`,
-      width: useStyleUnit(props.width).value,
+      minWidth: useStyleUnit(props.width).value,
       zIndex: 2023,
       inset: "0 auto auto 0",
     };

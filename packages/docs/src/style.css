@@ -1,3 +1,7 @@
 :root {
-  background-color: #111823;
+  /* background-color: #111823; */
+}
+body {
+  margin: 0;
+  padding: 0;
 }

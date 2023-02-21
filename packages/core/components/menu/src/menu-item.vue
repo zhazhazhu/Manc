@@ -1,13 +1,16 @@
 <script lang='ts' setup>
+import { useClassesName } from '@manc-ui/hooks';
+import { menuItemProps } from './menu-item';
 
+const props = defineProps(menuItemProps)
+
+const cs = useClassesName('menu-item')
 </script>
 
 <template>
-  <li class="ma-menu-item">
+  <li :class="[cs.s()]">
     <slot name="default"></slot>
   </li>
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

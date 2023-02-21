@@ -1,7 +1,7 @@
 @import "./var.less";
 
 .mc-popper {
-  padding: 10px;
+  padding: 6px;
   font-size: 14px;
   line-height: 1.4;
   position: absolute;
@@ -26,8 +26,11 @@
   transition: opacity 0.3s ease;
 }
 
-.mc-enter-from,
-.mc-leave-to {
+.mc-enter-from {
   opacity: 0;
   transition: all 0.2s ease-out;
+}
+.mc-leave-to {
+  opacity: 0;
+  transition: all 0.5s ease-out;
 }

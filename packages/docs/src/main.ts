@@ -2,7 +2,7 @@ import "@manc-ui/theme";
 import "uno.css";
 import { createApp } from "vue";
 import App from "./App.vue";
-// import "./style.css";
+import "./style.css";
 
 const app = createApp(App);
 
