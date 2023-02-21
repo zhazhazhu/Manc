@@ -7,17 +7,27 @@
     "docs:build": "pnpm -C packages/docs run docs:build",
     "docs:serve": "pnpm -C packages/docs run docs:serve",
     "clean": "rimraf dist packages/*/dist",
-    "lint": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "patch": "pnpm -C packages/core run patch",
     "minor": "pnpm -C packages/core run minor",
     "major": "pnpm -C packages/core run major"
   },
+  "dependencies": {
+    "@ctrl/tinycolor": "^3.5.0",
+    "@manc-ui/hooks": "workspace:*",
+    "@manc-ui/theme": "workspace:^0.0.0",
+    "@manc-ui/token": "workspace:^0.0.0",
+    "@manc-ui/utils": "workspace:^0.0.0"
+  },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.35.2",
     "@iconify/json": "^2.2.18",
     "@types/lodash": "^4.14.184",
     "@types/node": "^18.7.6",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vueuse/core": "^9.1.1",
+    "eslint": "^8.34.0",
     "less": "^4.1.3",
     "lodash": "^4.17.21",
     "manci-ui": "workspace:^0.0.0",
@@ -29,7 +39,6 @@
     "unplugin-icons": "^0.15.2",
     "unplugin-vue-components": "^0.23.0",
     "vite": "^3.0.8",
-    "vitepress": "^1.0.0-alpha.4",
     "vue": "^3.2.37"
   },
   "pnpm": {
@@ -39,12 +48,5 @@
         "@interactjs/utils"
       ]
     }
-  },
-  "dependencies": {
-    "@ctrl/tinycolor": "^3.5.0",
-    "@manc-ui/hooks": "workspace:*",
-    "@manc-ui/theme": "workspace:^0.0.0",
-    "@manc-ui/token": "workspace:^0.0.0",
-    "@manc-ui/utils": "workspace:^0.0.0"
   }
 }

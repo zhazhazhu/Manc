@@ -1,13 +1,13 @@
-import { ComputedRef, CSSProperties, InjectionKey } from "vue";
+import type { CSSProperties, ComputedRef, InjectionKey } from 'vue'
 
-export type UseStylesReturn = {
-  arrow: CSSProperties;
-  content: CSSProperties;
-};
-
-interface InjectPopperContext {
-  styles: ComputedRef<UseStylesReturn>;
+export interface UseStylesReturn {
+  arrow: CSSProperties
+  content: CSSProperties
 }
 
-export const POPPER_INJECTION_KEY: InjectionKey<InjectPopperContext> =
-  Symbol("popper");
+interface InjectPopperContext {
+  styles: ComputedRef<UseStylesReturn>
+}
+
+export const POPPER_INJECTION_KEY: InjectionKey<InjectPopperContext>
+  = Symbol('popper')

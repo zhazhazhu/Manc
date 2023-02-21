@@ -1,21 +1,21 @@
 <script lang="ts" setup>
-import { useClassesName } from "@manc-ui/hooks";
-import { POPPER_INJECTION_KEY } from "@manc-ui/token";
-import { McArrow } from "manci-ui";
+import { useClassesName } from '@manc-ui/hooks'
+import { POPPER_INJECTION_KEY } from '@manc-ui/token'
+import { McArrow } from 'manci-ui'
 import {
+  POPPER_CONTAINER_ID,
   createPopperContainer,
   popperEmits,
   popperProps,
-  POPPER_CONTAINER_ID,
   useDelayedToggle,
-  usePopper
-} from "./popper";
+  usePopper,
+} from './popper'
 
-const popperContainer = createPopperContainer();
+const props = defineProps(popperProps)
 
-const props = defineProps(popperProps);
+const emit = defineEmits(popperEmits)
 
-const emit = defineEmits(popperEmits);
+const popperContainer = createPopperContainer()
 
 const {
   styles,
@@ -24,13 +24,13 @@ const {
   contentRef,
   open,
   close,
-} = usePopper(props);
+} = usePopper(props)
 
-const { onOpen, onClose } = useDelayedToggle({ props, open, close });
+const { onOpen, onClose } = useDelayedToggle({ props, open, close })
 
-const [p_cs, t_cs] = [useClassesName("popper"), useClassesName("trigger")];
+const [p_cs, t_cs] = [useClassesName('popper'), useClassesName('trigger')]
 
-provide(POPPER_INJECTION_KEY, { styles });
+provide(POPPER_INJECTION_KEY, { styles })
 
 defineExpose({
   triggerRef,
@@ -39,15 +39,17 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="triggerRef" @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')"
-    @mousedown="onOpen($event, 'focus')" @blur="onClose($event, 'focus')" @click="onOpen($event, 'click')"
-    @contextmenu="onOpen($event, 'contextmenu')" :class="[t_cs.s()]" v-bind="$attrs">
-    <slot></slot>
+  <div
+    ref="triggerRef" :class="[t_cs.s()]" v-bind="$attrs"
+    @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')" @mousedown="onOpen($event, 'focus')"
+    @blur="onClose($event, 'focus')" @click="onOpen($event, 'click')" @contextmenu="onOpen($event, 'contextmenu')"
+  >
+    <slot />
   </div>
 
   <Teleport :to="`#${POPPER_CONTAINER_ID}`">
     <Transition name="mc" @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')">
-      <div ref="contentRef" v-show="control" :class="[p_cs.s()]" :style="styles.content">
+      <div v-show="control" ref="contentRef" :class="[p_cs.s()]" :style="styles.content">
         <span>
           <slot name="content">{{ content }}</slot>
         </span>

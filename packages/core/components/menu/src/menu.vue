@@ -1,7 +1,7 @@
 <script lang='ts' setup>
-import { useClassesName } from '@manc-ui/hooks';
-import { MENU_INJECTION_KEY } from '@manc-ui/token';
-import { menuProps } from './menu';
+import { useClassesName } from '@manc-ui/hooks'
+import { MENU_INJECTION_KEY } from '@manc-ui/token'
+import { menuProps } from './menu'
 
 const props = defineProps(menuProps)
 
@@ -12,7 +12,7 @@ provide(MENU_INJECTION_KEY, { mode: props.mode })
 
 <template>
   <ul :class="[cs.s(), cs.m(mode)]">
-    <slot name="default"></slot>
+    <slot name="default" />
   </ul>
 </template>
 

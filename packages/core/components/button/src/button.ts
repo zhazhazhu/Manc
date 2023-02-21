@@ -1,21 +1,21 @@
-import { TinyColor } from "@ctrl/tinycolor";
-import { ReadonlyExtractPropTypes } from "@manc-ui/utils";
-import { CSSProperties, PropType } from "vue";
+import { TinyColor } from '@ctrl/tinycolor'
+import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
+import type { CSSProperties, PropType } from 'vue'
 
 export type ButtonTypes =
-  | "default"
-  | "primary"
-  | "success"
-  | "warning"
-  | "info"
-  | "danger";
+  | 'default'
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'danger'
 
-export type ButtonSize = "large" | "default" | "small";
+export type ButtonSize = 'large' | 'default' | 'small'
 
 export const buttonProps = {
   type: {
     type: String as PropType<ButtonTypes>,
-    default: "default",
+    default: 'default',
   },
   link: {
     type: Boolean,
@@ -27,11 +27,11 @@ export const buttonProps = {
   },
   color: {
     type: String,
-    default: "",
+    default: '',
   },
   size: {
     type: String as PropType<ButtonSize>,
-    default: "small",
+    default: 'small',
   },
   circle: {
     type: Boolean,
@@ -57,50 +57,52 @@ export const buttonProps = {
     type: Boolean,
     default: true,
   },
-};
+}
 
-export type ButtonProps = ReadonlyExtractPropTypes<typeof buttonProps>;
+export type ButtonProps = ReadonlyExtractPropTypes<typeof buttonProps>
 
 export function useButton(props: ButtonProps) {
-  const _ref = ref<HTMLButtonElement>();
+  const _ref = ref<HTMLButtonElement>()
 
-  return { _ref };
+  return { _ref }
 }
 
 export function useButtonCustomStyle(props: ButtonProps) {
-  let styles: CSSProperties = {};
-  const color = new TinyColor(props.color);
-  const activeColor = color.mix("#141414", 20).lighten(5).toString();
+  let styles: CSSProperties = {}
+  const color = new TinyColor(props.color)
+  const activeColor = color.mix('#141414', 20).lighten(5).toString()
   if (props.color) {
     if (props.plain) {
       styles = {
-        "--button-background": activeColor,
-        "--button-color": props.color,
-        "--button-color-border": props.color,
-      };
-    } else {
+        '--button-background': activeColor,
+        '--button-color': props.color,
+        '--button-color-border': props.color,
+      }
+    }
+    else {
       if (props.disabled) {
         styles = {
-          "--button-background": activeColor,
-          "--button-color-hover": activeColor,
-          "--button-color-border": props.color,
-        };
-      } else {
+          '--button-background': activeColor,
+          '--button-color-hover': activeColor,
+          '--button-color-border': props.color,
+        }
+      }
+      else {
         styles = {
-          "--button-background": props.color,
-          "--button-color-hover": activeColor,
-          "--button-color-border": props.color,
-        };
+          '--button-background': props.color,
+          '--button-color-hover': activeColor,
+          '--button-color-border': props.color,
+        }
       }
     }
     if (props.disabled) {
       styles = {
-        "--button-background": activeColor,
-        "--button-color-hover": activeColor,
-        "--button-color-border": props.color,
-        "--button-color": "white",
-      };
+        '--button-background': activeColor,
+        '--button-color-hover': activeColor,
+        '--button-color-border': props.color,
+        '--button-color': 'white',
+      }
     }
   }
-  return styles;
+  return styles
 }

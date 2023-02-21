@@ -1,11 +1,11 @@
-import { MenuModeType } from "@manc-ui/token";
-import { ReadonlyExtractPropTypes } from "@manc-ui/utils";
-import { PropType } from "vue";
+import type { MenuModeType } from '@manc-ui/token'
+import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
+import type { PropType } from 'vue'
 
 export const menuProps = {
   mode: {
     type: String as PropType<MenuModeType>,
-    default: "vertical",
+    default: 'vertical',
   },
   height: {
     type: [String, Number],
@@ -14,6 +14,6 @@ export const menuProps = {
   index: {
     type: String,
   },
-};
+}
 
-export type MenuProps = ReadonlyExtractPropTypes<typeof menuProps>;
+export type MenuProps = ReadonlyExtractPropTypes<typeof menuProps>

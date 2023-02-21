@@ -1,7 +1,7 @@
 <script lang='ts' setup>
-import { useClassesName } from '@manc-ui/hooks';
-import { McPopper } from 'manci-ui';
-import { submenuProps, useSubmenu } from './sub-menu';
+import { useClassesName } from '@manc-ui/hooks'
+import { McPopper } from 'manci-ui'
+import { submenuProps, useSubmenu } from './sub-menu'
 
 const props = defineProps(submenuProps)
 const { menuitemStyles, popperRef } = useSubmenu(props)
@@ -10,19 +10,19 @@ const { isOutside } = useMouseInElement(popperRef)
 </script>
 
 <template>
-  <li :class="[cs.s()]" ref="popperRef">
+  <li ref="popperRef" :class="[cs.s()]">
     <McPopper :class="[cs.m('popper')]" :trigger="trigger" :show-arrow="false" :offset="5" :width="150">
       <template #default>
-        <slot name="title"></slot>
+        <slot name="title" />
         <div :class="[cs.m('arrow')]">
-          <div i-ic-baseline-keyboard-arrow-up v-show="!isOutside"></div>
-          <div i-ic-baseline-keyboard-arrow-down v-show="isOutside"></div>
+          <div v-show="!isOutside" i-ic-baseline-keyboard-arrow-up />
+          <div v-show="isOutside" i-ic-baseline-keyboard-arrow-down />
         </div>
       </template>
 
       <template #content>
         <div :class="[cs.m('content')]">
-          <slot name="default"></slot>
+          <slot name="default" />
         </div>
       </template>
     </McPopper>

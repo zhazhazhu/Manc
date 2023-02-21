@@ -1,4 +1,4 @@
-import { ReadonlyExtractPropTypes } from "@manc-ui/utils";
+import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
 
 export const menuItemProps = {
   index: {
@@ -7,6 +7,6 @@ export const menuItemProps = {
   subMenu: {
     type: Boolean,
   },
-};
+}
 
-export type MenuItemProps = ReadonlyExtractPropTypes<typeof menuItemProps>;
+export type MenuItemProps = ReadonlyExtractPropTypes<typeof menuItemProps>

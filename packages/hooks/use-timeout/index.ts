@@ -1,16 +1,17 @@
 export function useTimeout() {
-  let timeoutHandle: number;
+  let timeoutHandle: number
+
+  const cancelTimeout = () => window.clearTimeout(timeoutHandle)
 
   const registerTimeout = (fn: (...args: any[]) => any, delay: number) => {
-    cancelTimeout();
-    timeoutHandle = window.setTimeout(fn, delay);
-  };
-  const cancelTimeout = () => window.clearTimeout(timeoutHandle);
+    cancelTimeout()
+    timeoutHandle = window.setTimeout(fn, delay)
+  }
 
-  tryOnScopeDispose(() => cancelTimeout());
+  tryOnScopeDispose(() => cancelTimeout())
 
   return {
     registerTimeout,
     cancelTimeout,
-  };
+  }
 }

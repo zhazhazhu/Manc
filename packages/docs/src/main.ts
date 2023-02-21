@@ -1,9 +1,9 @@
-import "@manc-ui/theme";
-import "uno.css";
-import { createApp } from "vue";
-import App from "./App.vue";
-import "./style.css";
+import '@manc-ui/theme'
+import 'uno.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+import './style.css'
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.mount("#app");
+app.mount('#app')

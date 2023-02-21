@@ -1,24 +1,25 @@
 <script lang="ts" setup>
-import { useClassesName } from "@manc-ui/hooks";
-import { EventName } from "../../../enum/event";
-import { switchEmits, switchProps } from "./switch";
+import { useClassesName } from '@manc-ui/hooks'
+import { EventName } from '../../../enum/event'
+import { switchEmits, switchProps } from './switch'
 
-const props = defineProps(switchProps);
+const props = defineProps(switchProps)
 
-const emit = defineEmits(switchEmits);
+const emit = defineEmits(switchEmits)
 
-const cs = useClassesName("switch");
+const cs = useClassesName('switch')
 
-const isControlled = ref(props.modelValue !== false);
+const isControlled = ref(props.modelValue !== false)
 
-const checked = computed(() => props.modelValue);
+const checked = computed(() => props.modelValue)
 
 const onclickSwitch = () => {
-  if (props.disabled) return;
-  isControlled.value = !isControlled.value;
-  emit(EventName.UPDATE_MODEL_VALUE, isControlled.value);
-  emit(EventName.CHANGE, isControlled.value);
-};
+  if (props.disabled)
+    return
+  isControlled.value = !isControlled.value
+  emit(EventName.UPDATE_MODEL_VALUE, isControlled.value)
+  emit(EventName.CHANGE, isControlled.value)
+}
 </script>
 
 <template>
@@ -32,7 +33,7 @@ const onclickSwitch = () => {
     @click="onclickSwitch"
   >
     <span :class="cs.e('core')">
-      <span :class="[cs.e('action')]"></span>
+      <span :class="[cs.e('action')]" />
     </span>
   </div>
 </template>

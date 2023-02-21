@@ -1,20 +1,20 @@
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import { presetAttributify, presetIcons, presetUno } from "unocss";
-import UnoCSS from "unocss/vite";
-import AutoImport from "unplugin-auto-import/vite";
-import IconsResolver from "unplugin-icons/resolver";
-import Icons from "unplugin-icons/vite";
-import Components from "unplugin-vue-components/vite";
-import { defineConfig } from "vite";
+import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
+import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
 
-const externals = ["vue"];
+const externals = ['vue']
 
 export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports: ["vue", "@vueuse/core"],
+      imports: ['vue', '@vueuse/core'],
       vueTemplate: true,
     }),
     Components({
@@ -29,8 +29,8 @@ export default defineConfig({
         presetUno(),
         presetIcons({
           extraProperties: {
-            display: "inline-block",
-            "vertical-align": "middle",
+            'display': 'inline-block',
+            'vertical-align': 'middle',
           },
         }),
       ],
@@ -39,21 +39,21 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, "./index.ts"),
-      name: "Manc-UI",
-      fileName: "Manc-UI",
+      entry: resolve(__dirname, './index.ts'),
+      name: 'Manc-UI',
+      fileName: 'Manc-UI',
     },
-    outDir: "dist",
+    outDir: 'dist',
     rollupOptions: {
       external: externals,
       output: {
         globals: {
-          vue: "Vue",
+          vue: 'Vue',
         },
       },
     },
   },
   resolve: {
-    alias: [{ find: "~/", replacement: `${resolve(__dirname)}/` }],
+    alias: [{ find: '~/', replacement: `${resolve(__dirname)}/` }],
   },
-});
+})

@@ -1,10 +1,10 @@
-import { InjectionKey } from "vue";
+import type { InjectionKey } from 'vue'
 
-export type MenuModeType = "horizontal" | "vertical";
+export type MenuModeType = 'horizontal' | 'vertical'
 
 export interface InjectMenuContext {
-  mode: MenuModeType;
+  mode: MenuModeType
 }
 
-export const MENU_INJECTION_KEY: InjectionKey<InjectMenuContext> =
-  Symbol("menu");
+export const MENU_INJECTION_KEY: InjectionKey<InjectMenuContext>
+  = Symbol('menu')

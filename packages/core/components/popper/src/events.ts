@@ -1,3 +1,3 @@
 export enum EventName {
-  UPDATE_VISIBLE = "update:visible",
+  UPDATE_VISIBLE = 'update:visible',
 }
