@@ -14,6 +14,7 @@ export type SubmenuProps = ReadonlyExtractPropTypes<typeof submenuProps>
 export function useSubmenu(props: SubmenuProps) {
   const submenuRef = ref<HTMLLIElement>()
   const popperRef = ref<HTMLLIElement>()
+  const arrowDirections = ref(false)
 
   const menuitemStyles = computed<CSSProperties>(() => ({}))
 
@@ -21,5 +22,6 @@ export function useSubmenu(props: SubmenuProps) {
     submenuRef,
     popperRef,
     menuitemStyles,
+    arrowDirections,
   }
 }

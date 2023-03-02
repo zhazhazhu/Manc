@@ -43,10 +43,10 @@ export const popperProps = {
     type: String,
     default: '',
   },
-  // placement: {
-  //   type: String as PropType<Placement>,
-  //   default: "bottom",
-  // },
+  placement: {
+    type: String as PropType<Placement>,
+    default: 'bottom',
+  },
   visible: {
     type: Boolean,
     default: undefined,

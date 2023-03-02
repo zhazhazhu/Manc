@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useClassesName } from '@manc-ui/hooks'
 import { POPPER_INJECTION_KEY } from '@manc-ui/token'
-import { McArrow } from 'manci-ui'
+import { EventName, McArrow } from 'manci-ui'
 import {
   POPPER_CONTAINER_ID,
   createPopperContainer,
@@ -29,6 +29,10 @@ const {
 const { onOpen, onClose } = useDelayedToggle({ props, open, close })
 
 const [p_cs, t_cs] = [useClassesName('popper'), useClassesName('trigger')]
+
+watch(control, (value) => {
+  emit(EventName.UPDATE_VISIBLE, value)
+})
 
 provide(POPPER_INJECTION_KEY, { styles })
 

@@ -5,21 +5,19 @@ import { submenuProps, useSubmenu } from './sub-menu'
 
 const props = defineProps(submenuProps)
 
-const { menuitemStyles, popperRef } = useSubmenu(props)
+const { arrowDirections, popperRef } = useSubmenu(props)
 
 const cs = useClassesName('sub-menu')
-
-const { isOutside } = useMouseInElement(popperRef)
 </script>
 
 <template>
   <li ref="popperRef" :class="[cs.s()]">
-    <McPopper :class="[cs.m('popper')]" :trigger="trigger" :show-arrow="false" :offset="5" :width="150">
+    <McPopper :class="[cs.m('popper')]" :trigger="trigger" :show-arrow="false" :offset="5" :width="150" @update:visible="arrowDirections = !arrowDirections">
       <template #default>
         <slot name="title" />
         <div :class="[cs.m('arrow')]">
-          <div v-show="!isOutside" i-ic-baseline-keyboard-arrow-up />
-          <div v-show="isOutside" i-ic-baseline-keyboard-arrow-down />
+          <div v-show="!arrowDirections" i-ic-baseline-keyboard-arrow-up />
+          <div v-show="arrowDirections" i-ic-baseline-keyboard-arrow-down />
         </div>
       </template>
 

@@ -23,7 +23,7 @@ function onchange(val: boolean) {
       <McMenuItem>Copy</McMenuItem>
       <McMenuItem>Paste</McMenuItem>
     </McSubMenu>
-    <McSubMenu>
+    <McSubMenu trigger="click">
       <template #title>
         Edit
       </template>
