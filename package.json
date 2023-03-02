@@ -20,7 +20,8 @@
     "@manc-ui/hooks": "workspace:*",
     "@manc-ui/theme": "workspace:^0.0.0",
     "@manc-ui/token": "workspace:^0.0.0",
-    "@manc-ui/utils": "workspace:^0.0.0"
+    "@manc-ui/utils": "workspace:^0.0.0",
+    "@popperjs/core": "^2.11.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",
