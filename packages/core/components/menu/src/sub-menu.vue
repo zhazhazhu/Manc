@@ -4,8 +4,11 @@ import { McPopper } from 'manci-ui'
 import { submenuProps, useSubmenu } from './sub-menu'
 
 const props = defineProps(submenuProps)
+
 const { menuitemStyles, popperRef } = useSubmenu(props)
+
 const cs = useClassesName('sub-menu')
+
 const { isOutside } = useMouseInElement(popperRef)
 </script>
 

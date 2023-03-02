@@ -87,7 +87,7 @@ export function usePopper(props: PopperProps) {
   const triggerRef = ref<HTMLDivElement>()
   const contentRef = ref<HTMLDivElement>()
   const control = ref(props.visible || false)
-  const styles = useStyles(triggerRef, contentRef, props)
+  const styles = useStyles(triggerRef, control, props)
   const { trigger } = toRefs(props)
 
   const { registerListener, cleanupListener } = useClickAway(contentRef, {
@@ -168,7 +168,7 @@ export function useDelayedToggle({
 
 function useStyles(
   triggerRef: Ref<HTMLDivElement | undefined>,
-  contentRef: Ref<HTMLDivElement | undefined>,
+  control: Ref<Boolean>,
   props: PopperProps,
 ) {
   const windowSize = useWindowSize()
@@ -198,13 +198,13 @@ function useStyles(
   }
 
   watch(
-    [triggerRef, windowSize.width, windowSize.height],
+    [triggerRef, control, windowSize.width, windowSize.height],
     () => {
       if (!triggerRef.value)
         return
       let contentLeft = left.value + width.value / 2 - props.width / 2
       contentLeft
-        = contentLeft < 0
+          = contentLeft < 0
           ? 0
           : contentLeft + props.width > windowSize.width.value
             ? windowSize.width.value - props.width

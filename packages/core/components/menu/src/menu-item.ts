@@ -9,4 +9,12 @@ export const menuItemProps = {
   },
 }
 
+export const menuItemGroupProps = {
+  title: {
+    type: String,
+  },
+}
+
 export type MenuItemProps = ReadonlyExtractPropTypes<typeof menuItemProps>
+
+export type MenuItemGroupProps = ReadonlyExtractPropTypes<typeof menuItemGroupProps>
