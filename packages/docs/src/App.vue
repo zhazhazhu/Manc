@@ -65,8 +65,8 @@ function onchange(val: boolean) {
     <McButton type="danger">
       危险按钮
     </McButton>
-    <McPopper :width="500" trigger="click" content="this is content, this is content, this is content">
-      <McButton style="margin: 10px">
+    <McPopper content="Tooltip" placement="bottom" trigger="click">
+      <McButton>
         Click Popper
       </McButton>
     </McPopper>

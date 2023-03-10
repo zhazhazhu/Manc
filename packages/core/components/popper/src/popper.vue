@@ -1,51 +1,40 @@
-<script lang="ts" setup>
+<script lang='ts' setup>
 import { useClassesName } from '@manc-ui/hooks'
+import { Arrow } from 'manci-ui'
 import { POPPER_INJECTION_KEY } from '@manc-ui/token'
-import { EventName, McArrow } from 'manci-ui'
-import {
-  POPPER_CONTAINER_ID,
-  createPopperContainer,
-  popperEmits,
-  popperProps,
-  useDelayedToggle,
-  usePopper,
-} from './popper'
+import { POPPER_CONTAINER_ID, createPopperContainer, popperProps, useDelayedToggle, usePopper, usePopperDOM } from './popper'
 
 const props = defineProps(popperProps)
 
-const emit = defineEmits(popperEmits)
+createPopperContainer()
 
-const popperContainer = createPopperContainer()
+const { referenceRef, contentRef, arrowRef, control, state, open, close, update } = usePopper(props)
 
-const {
-  styles,
-  control,
-  triggerRef,
-  contentRef,
-  open,
-  close,
-} = usePopper(props)
+const { contentStyle, arrowStyle, attributes } = usePopperDOM(props, state)
 
 const { onOpen, onClose } = useDelayedToggle({ props, open, close })
 
 const [p_cs, t_cs] = [useClassesName('popper'), useClassesName('trigger')]
 
-watch(control, (value) => {
-  emit(EventName.UPDATE_VISIBLE, value)
+onMounted(() => {
+  watch(control, () => update(), { immediate: true })
 })
 
-provide(POPPER_INJECTION_KEY, { styles })
+provide(POPPER_INJECTION_KEY, {
+  contentStyle,
+  arrowStyle,
+  attributes,
+})
 
 defineExpose({
-  triggerRef,
+  referenceRef,
   contentRef,
 })
 </script>
 
 <template>
   <div
-    ref="triggerRef" :class="[t_cs.s()]" v-bind="$attrs"
-    @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')" @mousedown="onOpen($event, 'focus')"
+    ref="referenceRef" :class="[t_cs.s()]" @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')" @mousedown="onOpen($event, 'focus')"
     @blur="onClose($event, 'focus')" @click="onOpen($event, 'click')" @contextmenu="onOpen($event, 'contextmenu')"
   >
     <slot />
@@ -53,14 +42,15 @@ defineExpose({
 
   <Teleport :to="`#${POPPER_CONTAINER_ID}`">
     <Transition name="mc" @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')">
-      <div v-show="control" ref="contentRef" :class="[p_cs.s()]" :style="styles.content">
+      <div v-show="control" ref="contentRef" :class="[p_cs.s()]" :style="contentStyle" v-bind="attributes">
         <span>
           <slot name="content">{{ content }}</slot>
         </span>
-        <McArrow v-show="showArrow" />
+        <Arrow v-if="showArrow" ref="arrowRef" />
       </div>
     </Transition>
   </Teleport>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+</style>

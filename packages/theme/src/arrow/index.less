@@ -2,17 +2,59 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  left: 0;
   &::before {
     width: 10px;
     height: 10px;
     content: " ";
     position: absolute;
+    box-sizing: border-box;
     border: 1px solid #e4e7ed;
     background: var(--mc-color-white);
-    border-bottom-color: transparent !important;
-    border-right-color: transparent !important;
     border-top-left-radius: 2px;
     transform: rotate(45deg);
+  }
+}
+
+.mc-popper[mc-popper-placement=bottom] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=bottom-start] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=bottom-end] > .mc-popper__arrow
+ {
+  top: -5px;
+  &::before{
+    border-bottom-color: transparent !important;
+    border-right-color: transparent !important;
+  }
+}
+
+.mc-popper[mc-popper-placement=top] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=top-start] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=top-end] > .mc-popper__arrow
+ {
+  bottom: -5px;
+  &:before{
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+  }
+}
+
+.mc-popper[mc-popper-placement=left] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=left-start] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=left-end] > .mc-popper__arrow
+ {
+  right: -5px;
+  &:before{
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+  }
+}
+
+.mc-popper[mc-popper-placement=right] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=right-start] > .mc-popper__arrow,
+.mc-popper[mc-popper-placement=right-end] > .mc-popper__arrow
+ {
+  left: -5px;
+  &:before{
+    border-top-color: transparent !important;
+    border-right-color: transparent !important;
   }
 }

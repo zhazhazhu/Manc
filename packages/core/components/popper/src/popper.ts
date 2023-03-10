@@ -1,15 +1,20 @@
+import { useClassesName, useClickAway, useTimeout } from '@manc-ui/hooks'
+import type { CSSProperties, PropType } from 'vue'
+import type { Placement, UseFloatingOptions } from '@floating-ui/vue'
 import {
-  useClassesName,
-  useClickAway,
-  useStyleUnit,
-  useTimeout,
-} from '@manc-ui/hooks'
-import type { UseStylesReturn } from '@manc-ui/token'
+  arrow, autoUpdate,
+  flip,
+  offset,
+  shift,
+  useFloating,
+} from '@floating-ui/vue'
+import { isBoolean } from '@vueuse/core'
+import type { Arrow } from 'manci-ui'
 import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
 import { isUndefine } from '@manc-ui/utils'
-import { isBoolean } from '@vueuse/core'
-import type { PropType, Ref } from 'vue'
 import { EventName } from './events'
+
+export type Trigger = 'click' | 'focus' | 'hover' | 'contextmenu'
 
 const POPPER_CONTAINER_ID = useClassesName('popper').m('container')
 
@@ -30,22 +35,18 @@ function createPopperContainer() {
   return popperContainerEl
 }
 
-export type Trigger = 'click' | 'focus' | 'hover' | 'contextmenu'
-
-export type Placement = 'top' | 'bottom' | 'left' | 'right'
-
-export const popperProps = {
+const popperProps = {
   trigger: {
     type: String as PropType<Trigger>,
     default: 'hover',
   },
-  content: {
-    type: String,
-    default: '',
-  },
   placement: {
     type: String as PropType<Placement>,
     default: 'bottom',
+  },
+  content: {
+    type: String,
+    default: '',
   },
   visible: {
     type: Boolean,
@@ -73,32 +74,43 @@ export const popperProps = {
   },
   offset: {
     type: Number,
-    default: 0,
+    default: 10,
   },
 }
 
-export const popperEmits = {
+const popperEmits = {
   [EventName.UPDATE_VISIBLE]: (val: boolean) => isBoolean(val),
 }
 
 export type PopperProps = ReadonlyExtractPropTypes<typeof popperProps>
 
-export function usePopper(props: PopperProps) {
-  const triggerRef = ref<HTMLDivElement>()
-  const contentRef = ref<HTMLDivElement>()
-  const control = ref(props.visible || false)
-  const styles = useStyles(triggerRef, control, props)
-  const { trigger } = toRefs(props)
+function usePopper(props: PopperProps) {
+  const control = ref(false)
+  const contentRef = ref<HTMLElement>()
+  const referenceRef = ref<HTMLElement>()
+  const arrowRef = ref<InstanceType<typeof Arrow>>()
+
+  const FloatingOptions = reactive<UseFloatingOptions>({
+    placement: props.placement,
+    middleware: [offset(props.offset), flip(), arrow({
+      element: arrowRef,
+    }), shift()],
+    whileElementsMounted: autoUpdate,
+  })
+
+  const { x, y, strategy, middlewareData, update, placement } = useFloating(referenceRef, contentRef, FloatingOptions)
+
+  const state = computed(() => ({ x, y, strategy, placement, arrow: middlewareData.value.arrow }))
 
   const { registerListener, cleanupListener } = useClickAway(contentRef, {
-    excepts: props.trigger === 'focus' ? [] : [triggerRef],
+    excepts: props.trigger === 'focus' ? [] : [referenceRef],
   })
 
   function open() {
     if (!isUndefine(props.visible).value)
       return
     registerListener(close)
-    if (trigger.value === 'click')
+    if (props.trigger === 'click')
       control.value = !control.value
     else control.value = true
   }
@@ -121,13 +133,35 @@ export function usePopper(props: PopperProps) {
   }
 
   return {
-    triggerRef,
+    control,
     contentRef,
+    referenceRef,
+    arrowRef,
+    state,
+    update,
     open,
     close,
-    control,
-    styles,
   }
+}
+
+function usePopperDOM(props: PopperProps, state: ReturnType<typeof usePopper>['state']) {
+  const { x, y, strategy, placement } = toRefs(state.value)
+
+  const attributes = computed(() => ({
+    'mc-popper-placement': placement.value,
+  }))
+  const contentStyle = computed<CSSProperties>(() => ({
+    minWidth: props.width > 150 ? `${props.width}px` : '150px',
+    position: strategy.value,
+    top: `${y.value}px`,
+    left: `${x.value}px`,
+  }))
+  const arrowStyle = computed<CSSProperties>(() => ({
+    top: `${state.value.arrow?.y}px`,
+    left: `${state.value.arrow?.x}px`,
+  }))
+
+  return { attributes, arrowStyle, contentStyle }
 }
 
 export interface UseDelayedToggleProps {
@@ -166,59 +200,11 @@ export function useDelayedToggle({
   }
 }
 
-function useStyles(
-  triggerRef: Ref<HTMLDivElement | undefined>,
-  control: Ref<Boolean>,
-  props: PopperProps,
-) {
-  const windowSize = useWindowSize()
-  const { left, top, width, height } = useElementBounding(triggerRef)
-  const styles = reactive<UseStylesReturn>({
-    arrow: {},
-    content: {},
-  })
-
-  function arrowEffect(contentLeft: number) {
-    styles.arrow = {
-      transform: `translate(${
-        left.value - contentLeft + width.value / 2 - 5
-      }px, 0px)`,
-      top: '-6px',
-    }
-  }
-
-  function contentEffect(contentLeft: number) {
-    const contentTop = top.value + height.value + props.offset || 0
-    styles.content = {
-      transform: `translate(${contentLeft}px, ${contentTop}px)`,
-      minWidth: useStyleUnit(props.width).value,
-      zIndex: 2023,
-      inset: '0 auto auto 0',
-    }
-  }
-
-  watch(
-    [triggerRef, control, windowSize.width, windowSize.height],
-    () => {
-      if (!triggerRef.value)
-        return
-      let contentLeft = left.value + width.value / 2 - props.width / 2
-      contentLeft
-          = contentLeft < 0
-          ? 0
-          : contentLeft + props.width > windowSize.width.value
-            ? windowSize.width.value - props.width
-            : (contentLeft || 0)
-      arrowEffect(contentLeft)
-      contentEffect(contentLeft)
-    },
-    {
-      deep: true,
-      immediate: true,
-    },
-  )
-
-  return computed(() => styles)
+export {
+  createPopperContainer,
+  usePopper,
+  usePopperDOM,
+  POPPER_CONTAINER_ID,
+  popperProps,
+  popperEmits,
 }
-
-export { POPPER_CONTAINER_ID, createPopperContainer }

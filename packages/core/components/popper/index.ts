@@ -1,10 +1,13 @@
 import { withInstall } from '@manc-ui/utils'
-import Arrow from './src/arrow.vue'
 import Popper from './src/popper.vue'
-export * from './src/events'
-export * from './src/popper'
+import Arrow from './src/arrow.vue'
 
-export const McPopper = withInstall(Popper)
-export const McArrow = withInstall(Arrow)
+export const McPopper = withInstall(Popper, {
+  Arrow,
+})
+
+export {
+  Arrow,
+}
 
 export default McPopper
