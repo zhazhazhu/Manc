@@ -76,6 +76,10 @@ const popperProps = {
     type: Number,
     default: 10,
   },
+  appendBody: {
+    type: Boolean,
+    default: true,
+  },
 }
 
 const popperEmits = {

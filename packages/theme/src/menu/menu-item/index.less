@@ -14,17 +14,26 @@
 
 .mc-sub-menu {
   margin: 4px 0;
-  .mc-sub-menu--popper{
+  .mc-sub-menu--popper {
     margin: 0;
   }
 }
 
+
 //菜单项
 .mc-sub-menu--content,
 .mc-menu-item-group--content,
-.mc-menu-item-group--content .mc-sub-menu {
+.mc-menu-item-group--content .mc-sub-menu
+{
   display: flex;
   flex-direction: column;
+}
+
+.mc-sub-menu .mc-sub-menu--popper {
+  display: flex;
+  &:hover{
+    color: var(--mc-color-white);
+  }
 }
 
 //菜单项悬浮
@@ -38,10 +47,6 @@
   color: var(--mc-color-white);
   transition: background-color 0.5s;
   background-color: rgb(51 65 85 / var(--mc-bg-opacity));
-}
-
-.mc-menu-item-group--content .mc-sub-menu:hover {
-  color: var(--mc-color-white);
 }
 
 .mc-menu-item-group--title {

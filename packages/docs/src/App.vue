@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-import { McButton, McMenu, McMenuItem, McPopper, McSubMenu, McSwitch } from 'manci-ui'
-import { McMenuItemGroup } from '../../core/components/menu/index'
+import { McButton, McMenu, McMenuItem, McMenuItemGroup, McPopper, McSubMenu, McSwitch } from 'manci-ui'
 import Button from './pages/Button.vue'
 const check = ref(false)
 
@@ -22,6 +21,15 @@ function onchange(val: boolean) {
       <McMenuItem>Cut</McMenuItem>
       <McMenuItem>Copy</McMenuItem>
       <McMenuItem>Paste</McMenuItem>
+      <McSubMenu>
+        <template #title>
+          Edit
+        </template>
+        <template #default>
+          <McMenuItem>Cut</McMenuItem>
+          <McMenuItem>Copy</McMenuItem>
+        </template>
+      </McSubMenu>
     </McSubMenu>
     <McSubMenu trigger="click">
       <template #title>
@@ -30,12 +38,14 @@ function onchange(val: boolean) {
       <McMenuItemGroup title="title">
         <McMenuItem>Cut</McMenuItem>
         <McMenuItem>Copy</McMenuItem>
-        <McSubMenu>
+        <McSubMenu trigger="click">
           <template #title>
             Edit
           </template>
           <template #default>
             <McMenuItem>Cut</McMenuItem>
+            <McMenuItem>Copy</McMenuItem>
+            <McMenuItem>Copy</McMenuItem>
             <McMenuItem>Copy</McMenuItem>
           </template>
         </McSubMenu>

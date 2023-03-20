@@ -3,7 +3,7 @@
   "scripts": {
     "docs:dev": "vite --port 3100",
     "docs:build": "vite build",
-    "docs:preview":"vite preview"
+    "docs:preview": "vite preview"
   },
   "devDependencies": {}
 }

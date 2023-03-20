@@ -1,6 +1,6 @@
 import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
+import type { PropType } from 'vue'
 import type { Trigger } from 'manci-ui'
-import type { CSSProperties, PropType } from 'vue'
 
 export const submenuProps = {
   trigger: {
@@ -12,16 +12,16 @@ export const submenuProps = {
 export type SubmenuProps = ReadonlyExtractPropTypes<typeof submenuProps>
 
 export function useSubmenu(props: SubmenuProps) {
+  const instance = getCurrentInstance()!
   const submenuRef = ref<HTMLLIElement>()
   const popperRef = ref<HTMLLIElement>()
   const arrowDirections = ref(false)
-
-  const menuitemStyles = computed<CSSProperties>(() => ({}))
+  const isFirstLevel = computed(() => instance.parent?.type.__name === 'menu')
 
   return {
     submenuRef,
     popperRef,
-    menuitemStyles,
     arrowDirections,
+    isFirstLevel,
   }
 }

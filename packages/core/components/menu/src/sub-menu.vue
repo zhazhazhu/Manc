@@ -5,14 +5,29 @@ import { submenuProps, useSubmenu } from './sub-menu'
 
 const props = defineProps(submenuProps)
 
-const { arrowDirections, popperRef } = useSubmenu(props)
+const { arrowDirections, submenuRef, popperRef, isFirstLevel } = useSubmenu(props)
 
 const cs = useClassesName('sub-menu')
+
+defineExpose({
+  submenuRef,
+  popperRef,
+})
 </script>
 
 <template>
-  <li ref="popperRef" :class="[cs.s()]">
-    <McPopper :class="[cs.m('popper')]" :trigger="trigger" :show-arrow="false" :offset="5" :width="150" @update:visible="arrowDirections = !arrowDirections">
+  <li ref="submenuRef" :class="[cs.s()]">
+    <McPopper
+      ref="popperRef"
+      :placement="isFirstLevel ? 'bottom-start' : 'right-start'"
+      :class="[cs.m('popper')]"
+      :trigger="trigger"
+      :show-arrow="false"
+      :offset="10"
+      :width="150"
+      :append-body="isFirstLevel"
+      @update:visible="arrowDirections = !arrowDirections"
+    >
       <template #default>
         <slot name="title" />
         <div :class="[cs.m('arrow')]">
