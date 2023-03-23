@@ -11,13 +11,14 @@ const emit = defineEmits(menuItemEmits)
 
 const cs = useClassesName('menu-item')
 
-const { router, defaultActive } = inject(MENU_INJECTION_KEY)!
+const { router, activeIndex } = inject(MENU_INJECTION_KEY)!
 
 const instance = getCurrentInstance()!
 
-const active = computed(() => props.index === defaultActive)
+const active = computed(() => activeIndex.value === props.index)
 
 function handleClick() {
+  activeIndex.value = props.index!
   const _router = instance.appContext.config.globalProperties.$router as Router
   if (router && _router)
     _router.push(props.route || props.index!)
@@ -31,7 +32,7 @@ function handleClick() {
 </script>
 
 <template>
-  <li :class="[cs.s()]" @click="handleClick">
+  <li :class="[cs.s(), cs.is('active', active)]" @click="handleClick">
     <slot name="default" />
   </li>
 </template>

@@ -9,7 +9,9 @@ const cs = useClassesName('menu')
 
 const openMenus = ref<Set<string>>(new Set())
 
-provide(MENU_INJECTION_KEY, { mode: props.mode, uniqueOpened: props.uniqueOpened, openMenus, router: props.router, defaultActive: props.defaultActive })
+const activeIndex = ref(props.defaultActive)
+
+provide(MENU_INJECTION_KEY, { mode: props.mode, uniqueOpened: props.uniqueOpened, openMenus, router: props.router, activeIndex })
 </script>
 
 <template>

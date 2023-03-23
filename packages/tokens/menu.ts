@@ -6,8 +6,8 @@ export interface InjectMenuContext {
   mode: MenuModeType
   uniqueOpened: boolean
   openMenus: Ref<Set<string>>
-  router: Boolean
-  defaultActive: String
+  router: boolean
+  activeIndex: Ref<string>
 }
 
 export const MENU_INJECTION_KEY: InjectionKey<InjectMenuContext>
