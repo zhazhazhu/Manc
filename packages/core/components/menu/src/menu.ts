@@ -7,12 +7,17 @@ export const menuProps = {
     type: String as PropType<MenuModeType>,
     default: 'vertical',
   },
-  height: {
-    type: [String, Number],
-    default: 50,
+  uniqueOpened: {
+    type: Boolean,
+    default: false,
   },
-  index: {
+  router: {
+    type: Boolean,
+    default: false,
+  },
+  defaultActive: {
     type: String,
+    default: '',
   },
 }
 

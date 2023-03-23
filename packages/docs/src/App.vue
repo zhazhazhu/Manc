@@ -8,45 +8,78 @@ function onchange(val: boolean) {
 </script>
 
 <template>
-  <McMenu style="margin-bottom: 10px;">
-    <McMenuItem>MI</McMenuItem>
-    <McMenuItem>Manc UI</McMenuItem>
-    <McMenuItem>File</McMenuItem>
-    <McSubMenu>
+  <RouterView />
+  <McMenu style="margin-bottom: 10px;" mode="horizontal" unique-opened router>
+    <McMenuItem index="1">
+      MI
+    </McMenuItem>
+    <McMenuItem index="2">
+      Manc UI
+    </McMenuItem>
+    <McMenuItem index="3">
+      File
+    </McMenuItem>
+    <McSubMenu index="4">
       <template #title>
         Edit
       </template>
-      <McMenuItem>Undo</McMenuItem>
-      <McMenuItem>Redo</McMenuItem>
-      <McMenuItem>Cut</McMenuItem>
-      <McMenuItem>Copy</McMenuItem>
-      <McMenuItem>Paste</McMenuItem>
-      <McSubMenu>
+      <McMenuItem index="4-1">
+        Undo
+      </McMenuItem>
+      <McMenuItem index="4-1">
+        Redo
+      </McMenuItem>
+      <McMenuItem index="4-2">
+        Cut
+      </McMenuItem>
+      <McMenuItem index="4-3">
+        Copy
+      </McMenuItem>
+      <McMenuItem index="4-4">
+        Paste
+      </McMenuItem>
+      <McSubMenu index="4-4-1">
         <template #title>
           Edit
         </template>
         <template #default>
-          <McMenuItem>Cut</McMenuItem>
-          <McMenuItem>Copy</McMenuItem>
+          <McMenuItem index="4-4-1-1">
+            Cut
+          </McMenuItem>
+          <McMenuItem index="4-4-1-2">
+            Copy
+          </McMenuItem>
         </template>
       </McSubMenu>
     </McSubMenu>
-    <McSubMenu trigger="click">
+    <McSubMenu trigger="click" index="5">
       <template #title>
         Edit
       </template>
       <McMenuItemGroup title="title">
-        <McMenuItem>Cut</McMenuItem>
-        <McMenuItem>Copy</McMenuItem>
-        <McSubMenu trigger="click">
+        <McMenuItem index="5-1">
+          Cut
+        </McMenuItem>
+        <McMenuItem index="5-2">
+          Copy
+        </McMenuItem>
+        <McSubMenu trigger="click" index="5-2-1">
           <template #title>
             Edit
           </template>
           <template #default>
-            <McMenuItem>Cut</McMenuItem>
-            <McMenuItem>Copy</McMenuItem>
-            <McMenuItem>Copy</McMenuItem>
-            <McMenuItem>Copy</McMenuItem>
+            <McMenuItem index="5-2-2">
+              Cut
+            </McMenuItem>
+            <McMenuItem index="5-2-3">
+              Copy
+            </McMenuItem>
+            <McMenuItem index="5-2-4">
+              Copy
+            </McMenuItem>
+            <McMenuItem index="5-2-5">
+              Copy
+            </McMenuItem>
           </template>
         </McSubMenu>
       </McMenuItemGroup>
@@ -58,7 +91,7 @@ function onchange(val: boolean) {
     默认按钮
   </McButton>
 
-  <div style="margin-bottom: 10px">
+  <div style="margin-botdtom: 10px">
     <McSwitch :model-value="check" size="small" @change="onchange" />
     <McSwitch v-model="check" size="default" disabled />
     <McSwitch v-model="check" size="large" />

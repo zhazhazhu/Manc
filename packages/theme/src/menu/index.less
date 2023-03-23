@@ -1,10 +1,18 @@
 @import "./menu-item/index.less";
 
 .mc-menu {
-  display: flex;
-  padding-left: 4px;
   color: var(--mc-color-white);
   background: var(--mc-color-main-5);
+  display: flex;
+  &.mc-menu--vertical{
+    position: relative;
+    padding-left: 4px;
+  }
+  &.mc-menu--horizontal{
+    width: 180px;
+    min-height: 400px;
+    flex-direction: column;
+  }
 }
 
 ul,

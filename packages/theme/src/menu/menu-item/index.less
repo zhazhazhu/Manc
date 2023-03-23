@@ -1,8 +1,9 @@
 @import "./var.less";
 
 .mc-menu-item,
+.mc-sub-menu--title,
 .mc-sub-menu--popper {
-  height: 30px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -10,10 +11,31 @@
   padding: 0 20px;
   margin: 4px 0;
   border-radius: 4px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+//纵向菜单样式
+.mc-menu--horizontal {
+  .mc-sub-menu--title {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mc-sub-menu--content {
+    padding: 0 10px;
+  }
+
+  .mc-menu-item-group--title {
+    font-size: 12px;
+    color: #c5c5c5;
+    padding: 4px 20px;
+  }
 }
 
 .mc-sub-menu {
   margin: 4px 0;
+
   .mc-sub-menu--popper {
     margin: 0;
   }
@@ -23,15 +45,16 @@
 //菜单项
 .mc-sub-menu--content,
 .mc-menu-item-group--content,
-.mc-menu-item-group--content .mc-sub-menu
-{
+.mc-menu-item-group--content .mc-sub-menu {
   display: flex;
   flex-direction: column;
 }
 
 .mc-sub-menu .mc-sub-menu--popper {
   display: flex;
-  &:hover{
+  justify-content: space-between;
+
+  &:hover {
     color: var(--mc-color-white);
   }
 }
@@ -43,7 +66,8 @@
 }
 
 //菜单项
-.mc-menu-item:hover {
+.mc-menu-item:hover,
+.mc-sub-menu--title:hover {
   color: var(--mc-color-white);
   transition: background-color 0.5s;
   background-color: rgb(51 65 85 / var(--mc-bg-opacity));

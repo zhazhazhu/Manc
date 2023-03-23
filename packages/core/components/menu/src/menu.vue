@@ -7,11 +7,13 @@ const props = defineProps(menuProps)
 
 const cs = useClassesName('menu')
 
-provide(MENU_INJECTION_KEY, { mode: props.mode })
+const openMenus = ref<Set<string>>(new Set())
+
+provide(MENU_INJECTION_KEY, { mode: props.mode, uniqueOpened: props.uniqueOpened, openMenus, router: props.router, defaultActive: props.defaultActive })
 </script>
 
 <template>
-  <ul :class="[cs.s(), cs.m(mode)]">
+  <ul ref="menuRef" :class="[cs.s(), cs.m(mode)]">
     <slot name="default" />
   </ul>
 </template>
