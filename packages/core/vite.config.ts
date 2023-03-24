@@ -35,7 +35,9 @@ export default defineConfig({
         }),
       ],
     }),
-    Icons(),
+    Icons({
+      autoInstall: true,
+    }),
   ],
   build: {
     lib: {

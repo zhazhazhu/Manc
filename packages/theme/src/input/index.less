@@ -1,0 +1,47 @@
+@import "./var.less";
+
+.mc-input {
+  width: 100%;
+  padding: 4px;
+  max-width: 300px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .mc-input__inner {
+    width: 100%;
+    height: var(--input-height);
+    border: 1px solid rgb(203 213 225/1);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--mc-color-gray-7);
+    background-color: var(--input-bg-color);
+
+    &::placeholder {
+      font-size: 13px;
+    }
+
+    &:focus {
+      outline: 2px solid #879AAE;
+      outline-offset: 2px;
+    }
+  }
+
+  .mc-input__inner.is-disabled {
+    cursor: no-drop;
+  }
+
+  .mc-input--suffix {
+    height: var(--input-height);
+    line-height: var(--input-height);
+    right: 14px;
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+
+.mc-textarea {
+  display: inline-flex;
+}

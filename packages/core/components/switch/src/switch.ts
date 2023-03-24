@@ -1,7 +1,7 @@
 import { isBoolean } from '@vueuse/core'
 import type { PropType } from 'vue'
 import { EventName } from '../../../enum/event'
-export type ButtonSize = 'large' | 'default' | 'small'
+export type SwitchSize = 'large' | 'default' | 'small'
 
 export const switchProps = {
   modelValue: {
@@ -9,7 +9,7 @@ export const switchProps = {
     default: true,
   },
   size: {
-    type: String as PropType<ButtonSize>,
+    type: String as PropType<SwitchSize>,
     default: 'small',
   },
   disabled: {
