@@ -20,8 +20,8 @@
     "packages/docs/**/*.ts",
     "packages/docs/**/*.tsx",
     "packages/docs/**/*.vue",
-    "packages/types/**.d.ts",
+    "icons-env.d.ts",
     "auto-imports.d.ts"
-  ],
+, "icons-env.d.ts", "icons-env.d.ts"  ],
   "exclude": ["**/dist/**", "node_modules", "vite.config.ts"]
 }

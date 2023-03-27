@@ -1,5 +1,6 @@
 import { TinyColor } from '@ctrl/tinycolor'
 import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
+import type { Size } from '@manc-ui/types'
 import type { CSSProperties, PropType } from 'vue'
 
 export type ButtonTypes =
@@ -9,8 +10,6 @@ export type ButtonTypes =
   | 'warning'
   | 'info'
   | 'danger'
-
-export type ButtonSize = 'large' | 'default' | 'small'
 
 export const buttonProps = {
   type: {
@@ -30,7 +29,7 @@ export const buttonProps = {
     default: '',
   },
   size: {
-    type: String as PropType<ButtonSize>,
+    type: String as PropType<Size>,
     default: 'small',
   },
   circle: {

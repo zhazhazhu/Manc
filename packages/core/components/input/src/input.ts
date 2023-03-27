@@ -1,10 +1,10 @@
 import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
 import type { PropType } from 'vue'
 import { isString } from '@vueuse/core'
+import type { Size } from '@manc-ui/types'
 import { EventName } from '../../../enum/event'
 
 export type InputType = 'text' | 'textarea'
-export type InputSize = 'large' | 'default' | 'small'
 
 export const inputProps = {
   modelValue: {
@@ -40,7 +40,7 @@ export const inputProps = {
     default: false,
   },
   size: {
-    type: String as PropType<InputSize>,
+    type: String as PropType<Size>,
     default: 'default',
   },
   showPassword: {

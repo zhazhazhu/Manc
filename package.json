@@ -21,7 +21,8 @@
     "@manc-ui/hooks": "workspace:*",
     "@manc-ui/theme": "workspace:^0.0.0",
     "@manc-ui/token": "workspace:^0.0.0",
-    "@manc-ui/utils": "workspace:^0.0.0"
+    "@manc-ui/utils": "workspace:^0.0.0",
+    "@manc-ui/types": "workspace:^0.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.2",

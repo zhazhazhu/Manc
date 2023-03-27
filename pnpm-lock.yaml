@@ -11,6 +11,7 @@ importers:
       '@manc-ui/hooks': workspace:*
       '@manc-ui/theme': workspace:^0.0.0
       '@manc-ui/token': workspace:^0.0.0
+      '@manc-ui/types': workspace:^0.0.0
       '@manc-ui/utils': workspace:^0.0.0
       '@types/lodash': ^4.14.184
       '@types/node': ^18.7.6
@@ -41,6 +42,7 @@ importers:
       '@manc-ui/hooks': link:packages/hooks
       '@manc-ui/theme': link:packages/theme
       '@manc-ui/token': link:packages/tokens
+      '@manc-ui/types': link:packages/types
       '@manc-ui/utils': link:packages/utils
     devDependencies:
       '@antfu/eslint-config': 0.35.2_r4nhl7oghl6mgx4ukbxrwoekle
@@ -82,6 +84,9 @@ importers:
     specifiers: {}
 
   packages/tokens:
+    specifiers: {}
+
+  packages/types:
     specifiers: {}
 
   packages/utils:
