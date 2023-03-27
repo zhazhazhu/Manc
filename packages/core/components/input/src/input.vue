@@ -19,7 +19,7 @@ const [i_cs, t_cs] = [useClassesName('input'), useClassesName('textarea')]
 const containerClasses = computed(() => [
   props.type !== 'textarea' ? i_cs.s() : t_cs.s(),
   props.type !== 'textarea' && i_cs.m(props.size),
-  props.type !== 'textarea' ? i_cs.is('focus', focused.value) : t_cs.is('focus', focused.value),
+  props.type !== 'textarea' ? i_cs.is('focus', focused.value && !props.readonly) : t_cs.is('focus', focused.value && !props.readonly),
   props.type !== 'textarea' ? i_cs.is('disabled', props.disabled) : t_cs.is('disabled', props.disabled),
 ])
 
@@ -73,6 +73,7 @@ function handleBlur(event: Event) {
         :class="[i_cs.e('inner')]"
         :placeholder="placeholder"
         :disabled="disabled"
+        :readonly="readonly"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
