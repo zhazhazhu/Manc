@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { McButton, McInput, McMenu, McMenuItem, McPopper, McSubMenu, McSwitch } from 'manci-ui'
+import { McButton, McInput, McMenu, McMenuItem, McPopper, McSelect, McSubMenu, McSwitch } from 'manci-ui'
 import Button from './pages/Button.vue'
 import PhMagnifyingGlassLight from '~icons/ph/magnifying-glass-light'
 
@@ -80,6 +80,8 @@ function onchange(val: boolean) {
   <div>
     <McInput v-model="input" type="textarea" :rows="4" />
   </div>
+
+  <McSelect />
 
   <Button />
   <McButton plain :border="false" color="rgb(51 65 85/1)" disabled>
