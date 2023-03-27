@@ -1,21 +1,24 @@
-.mc-input {
+.mc-input,
+.mc-textarea {
+  --input-border-color: rgb(203 213 225/1);
+
   &--default {
-    --input-height: 20px;
+    --input-height: 34px;
   }
 
   &--large {
-    --input-height: 24px;
+    --input-height: 42px;
   }
 
   &--small {
-    --input-height: 16px;
+    --input-height: 28px;
   }
 
-  .mc-input__inner {
+  & {
     --input-bg-color: var(--mc-color-white);
   }
 
-  .mc-input__inner.is-disabled {
+  &.is-disabled {
     --input-bg-color: var(--mc-color-gray-1);
   }
 }

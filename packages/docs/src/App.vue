@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { McButton, McInput, McMenu, McMenuItem, McPopper, McSubMenu, McSwitch } from 'manci-ui'
 import Button from './pages/Button.vue'
+import PhMagnifyingGlassLight from '~icons/ph/magnifying-glass-light'
+
 const check = ref(false)
 
 const input = ref('')
@@ -67,6 +69,16 @@ function onchange(val: boolean) {
   </div>
   <div>
     <McInput v-model="input" type="password" show-password />
+  </div>
+  <div>
+    <McInput v-model="input" placeholder="Please search">
+      <template #prefix>
+        <PhMagnifyingGlassLight />
+      </template>
+    </McInput>
+  </div>
+  <div>
+    <McInput v-model="input" type="textarea" :rows="4" />
   </div>
 
   <Button />
