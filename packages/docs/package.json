@@ -5,5 +5,10 @@
     "docs:build": "vite build",
     "docs:preview": "vite preview"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "vite-plugin-pages": "^0.29.0"
+  }
 }

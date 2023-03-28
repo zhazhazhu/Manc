@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["vite/client", "vite-plugin-pages/client"]
+  },
+  "include": ["**/*","../../typings/icons-env.d.ts"],
+  "exclude": ["**/dist/**", "node_modules", "vite.config.ts"]
+}

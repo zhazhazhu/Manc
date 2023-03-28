@@ -7,6 +7,9 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
+import Pages from 'vite-plugin-pages'
+
+const COMPONENTS_REDIRECT = '/components/button'
 
 export default defineConfig({
   plugins: [
@@ -36,6 +39,13 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true,
+    }),
+    Pages({
+      extendRoute(route) {
+        if (route.path === '/components')
+          route.redirect = COMPONENTS_REDIRECT
+        return route
+      },
     }),
   ],
   resolve: {

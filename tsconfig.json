@@ -14,14 +14,8 @@
     "types": ["vite/client"]
   },
   "include": [
-    "packages/core/**/*.ts",
-    "packages/core/**/*.tsx",
-    "packages/core/**/*.vue",
-    "packages/docs/**/*.ts",
-    "packages/docs/**/*.tsx",
-    "packages/docs/**/*.vue",
-    "icons-env.d.ts",
-    "auto-imports.d.ts"
-, "icons-env.d.ts", "icons-env.d.ts"  ],
+    "packages",
+    "typings/icons-env.d.ts"
+  ],
   "exclude": ["**/dist/**", "node_modules", "vite.config.ts"]
 }
