@@ -1,4 +1,4 @@
-name: Zhazhazhu's Moments
+name: Manc-ui
 
 on:
   push:
@@ -31,8 +31,8 @@ jobs:
 
         # 部署到 GitHub Pages
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ACCESS_TOKEN: ${{ secrets.ACTION_SECRET }} # 也就是我们刚才生成的 secret
-          BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
-          FOLDER: packages/docs/dist
+          personal_token: ${{ secrets.ACTION_SECRET }}
+          publish_dir: ./packages/docs/dist
+          branch: docs # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
