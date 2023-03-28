@@ -24,7 +24,7 @@ import MdiGithub from '~icons/mdi/github'
     </header>
     <div class="container">
       <aside>
-        <McMenu mode="horizontal" style="height: 100%;">
+        <McMenu mode="horizontal" style="height: 100%;" router>
           <McMenuItemGroup title="Getting Started">
             <McMenuItem index="/docs/introduction">
               Introduction
@@ -34,6 +34,9 @@ import MdiGithub from '~icons/mdi/github'
             </McMenuItem>
           </McMenuItemGroup>
           <McMenuItemGroup title="Components">
+            <McMenuItem index="/components/tabs">
+              Tabs
+            </McMenuItem>
             <McMenuItem index="/components/button">
               Button
             </McMenuItem>

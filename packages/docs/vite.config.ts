@@ -10,7 +10,7 @@ import { defineConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 
-const COMPONENTS_REDIRECT = '/components/button'
+const COMPONENTS_REDIRECT = '/components/tabs'
 
 export default defineConfig({
   plugins: [
