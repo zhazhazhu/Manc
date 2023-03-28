@@ -72,6 +72,7 @@ header .logo{
   margin: 0 auto;
   main{
     width: calc(100% - 180px);
+    padding: 20px;
   }
 }
 </style>

@@ -1,0 +1,21 @@
+.mc-tab-nav--container {
+  display: inline-flex;
+  background-color: var(--mc-color-main-light);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.mc-tab-nav--container .mc-tab-nav--item {
+  min-width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  
+  &.is-active {
+    box-shadow: 0 0 2px 0px #c4c4c47a;
+    background-color: var(--mc-color-white);
+  }
+}
