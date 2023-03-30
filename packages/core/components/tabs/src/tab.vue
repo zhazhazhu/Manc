@@ -14,6 +14,10 @@ defineOptions({
 onMounted(() => {
   parentInject && parentInject.registerChild(instance)
 })
+
+onBeforeUnmount(() => {
+  parentInject && parentInject.unRegisterChild(instance)
+})
 </script>
 
 <template>

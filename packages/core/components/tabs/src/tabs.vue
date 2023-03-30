@@ -13,7 +13,7 @@ const cs = useClassesName('tabs')
 
 <template>
   <div :class="[cs.s()]">
-    <TabNav :navs="navs" />
+    <TabNav :navs="navs" @tab-click="(...args) => $emit('tabClick', ...args)" />
     <div :class="[cs.m('content')]">
       <slot />
     </div>

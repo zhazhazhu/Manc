@@ -2,7 +2,7 @@ import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
 import { TABS_INJECTION_KEY } from '@manc-ui/token'
 import type { Component, ComponentInternalInstance, RendererElement, RendererNode, VNode, VNodeNormalizedChildren } from 'vue'
 import { isVNode } from 'vue'
-import { isString } from '@vueuse/core'
+import { isNumber, isString } from '@vueuse/core'
 import { EventName } from '../../../enum/event'
 import type { TabChildrenProps } from './tab'
 
@@ -14,15 +14,22 @@ export const tabsProps = {
 
 export type TabsProps = ReadonlyExtractPropTypes<typeof tabsProps>
 
+const isPaneName = (value: unknown): value is string | number =>
+  isString(value) || isNumber(value)
+
 export const tabsEmits = {
   [EventName.UPDATE_MODEL_VALUE]: (val: string | number) => isString(val),
+  tabChange: (name: string | number) => isPaneName(name),
+  tabClick: (tab: UseTabChildrenReturn, event: Event) => event instanceof Event,
 }
-export type TabsEmits = (e: EventName.UPDATE_MODEL_VALUE, val: string | number) => void
+export type TabsEmits = ((event: EventName.UPDATE_MODEL_VALUE, val: string | number) => void) & ((event: 'tabChange', name: string | number) => void)
 
-export type NavsLabel = string | { label: string | VNode<RendererNode, RendererElement, {
-  [key: string]: any
-}>[]
-name: string | number }
+export type NavsLabel = string | {
+  label: string | VNode<RendererNode, RendererElement, {
+    [key: string]: any
+  }>[]
+  name: string | number
+}
 
 export interface Navs {
   label: NavsLabel
@@ -38,6 +45,10 @@ export function useTabs(props: TabsProps, emit: TabsEmits) {
     label: item.slots.label?.() || (item.props as TabChildrenProps).label,
     name: (item.props as TabChildrenProps).name || index,
   }) as Navs))
+
+  watch(activeName, (value) => {
+    emit('tabChange', value!)
+  })
 
   provide(TABS_INJECTION_KEY, {
     ...tabPanes,
@@ -68,8 +79,8 @@ export function useTabChild(vm: ComponentInternalInstance, name: string) {
         children.value.push(child)
     })
   }
-  function unRegisterChild() {
-
+  function unRegisterChild(child: ComponentInternalInstance) {
+    children.value = children.value.filter(item => item.uid !== child.uid)
   }
   return {
     children,
