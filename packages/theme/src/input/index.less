@@ -1,8 +1,9 @@
 @import "./var.less";
 
 .mc-input {
-  width: 100%;
-  max-width: 300px;
+  width: -webkit-fill-available;
+  width: fill-available;
+  width: -moz-available;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +16,7 @@
   height: var(--input-height);
   background: var(--input-bg-color);
   box-sizing: border-box;
+  
 
   .mc-input__inner {
     width: 100%;

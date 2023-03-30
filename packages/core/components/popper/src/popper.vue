@@ -49,9 +49,9 @@ defineExpose({
   <Teleport :to="`#${POPPER_CONTAINER_ID}`" :disabled="!appendBody">
     <Transition name="mc" @mouseover="onOpen($event, 'hover')" @mouseleave="onClose($event, 'hover')">
       <div v-show="control" ref="contentRef" :class="[p_cs.s()]" :style="contentStyle" v-bind="attributes">
-        <span>
-          <slot name="content">{{ content }}</slot>
-        </span>
+        <slot name="content">
+          {{ content }}
+        </slot>
         <Arrow v-if="showArrow" ref="arrowRef" />
       </div>
     </Transition>

@@ -34,14 +34,20 @@ import MdiGithub from '~icons/mdi/github'
             </McMenuItem>
           </McMenuItemGroup>
           <McMenuItemGroup title="Components">
-            <McMenuItem index="/components/tabs">
-              Tabs
+            <McMenuItem index="/components/input">
+              Input
             </McMenuItem>
             <McMenuItem index="/components/button">
               Button
             </McMenuItem>
             <McMenuItem index="/components/switch">
               Switch
+            </McMenuItem>
+            <McMenuItem index="/components/tabs">
+              Tabs
+            </McMenuItem>
+            <McMenuItem index="/components/popper">
+              Popper
             </McMenuItem>
           </McMenuItemGroup>
         </McMenu>
@@ -56,8 +62,9 @@ import MdiGithub from '~icons/mdi/github'
 <style lang="less" scoped>
 header{
   border-bottom: 1px solid var(--mc-color-gray-1);
+  padding: 0 50px;
   .custom-menu{
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
   }
 }
@@ -69,13 +76,19 @@ header .logo{
   cursor: pointer;
 }
 .container{
-  max-width: 1400px;
+  max-width: 1440px;
   height: calc(100vh - 42px);
   display: flex;
   margin: 0 auto;
+  padding: 0 50px;
+  aside {
+    width: 240px;
+    padding-top: 40px;
+  }
   main{
-    width: calc(100% - 180px);
+    width: calc(100% - 240px);
     padding: 20px;
+    padding-top: 40px;
   }
 }
 </style>
