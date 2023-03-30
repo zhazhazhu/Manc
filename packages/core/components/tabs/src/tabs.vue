@@ -1,7 +1,7 @@
 <script lang='ts' setup>
 import { useClassesName } from '@manc-ui/hooks'
 import { tabsEmits, tabsProps, useTabs } from './tabs'
-import TabNav from './tabNav.vue'
+import TabNav from './tabNav'
 const props = defineProps(tabsProps)
 const emit = defineEmits(tabsEmits)
 defineOptions({

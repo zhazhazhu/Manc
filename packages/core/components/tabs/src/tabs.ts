@@ -1,6 +1,6 @@
 import type { ReadonlyExtractPropTypes } from '@manc-ui/utils'
 import { TABS_INJECTION_KEY } from '@manc-ui/token'
-import type { Component, ComponentInternalInstance, VNode, VNodeNormalizedChildren } from 'vue'
+import type { Component, ComponentInternalInstance, RendererElement, RendererNode, VNode, VNodeNormalizedChildren } from 'vue'
 import { isVNode } from 'vue'
 import { isString } from '@vueuse/core'
 import { EventName } from '../../../enum/event'
@@ -19,15 +19,25 @@ export const tabsEmits = {
 }
 export type TabsEmits = (e: EventName.UPDATE_MODEL_VALUE, val: string | number) => void
 
+export type NavsLabel = string | { label: string | VNode<RendererNode, RendererElement, {
+  [key: string]: any
+}>[]
+name: string | number }
+
+export interface Navs {
+  label: NavsLabel
+  name: string | number
+}
+
 export function useTabs(props: TabsProps, emit: TabsEmits) {
   const instance = getCurrentInstance()!
   const activeName = useVModel(props, 'modelValue', emit)
   const tabPanes = useTabChild(instance, 'McTab')
 
   const navs = computed(() => tabPanes.children.value.map((item, index) => ({
-    label: (item.props as TabChildrenProps).label,
+    label: item.slots.label?.() || (item.props as TabChildrenProps).label,
     name: (item.props as TabChildrenProps).name || index,
-  })))
+  }) as Navs))
 
   provide(TABS_INJECTION_KEY, {
     ...tabPanes,

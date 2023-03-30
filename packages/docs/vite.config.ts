@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
+import Tsx from '@vitejs/plugin-vue-jsx'
 import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -15,6 +16,7 @@ const COMPONENTS_REDIRECT = '/components/tabs'
 export default defineConfig({
   plugins: [
     vue(),
+    Tsx(),
     AutoImport({
       imports: ['vue', '@vueuse/core'],
       vueTemplate: true,
